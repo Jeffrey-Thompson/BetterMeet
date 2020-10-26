@@ -7,7 +7,7 @@ A user visits the home page and is invited to sign up for an account. They are t
 
 # MVP
 
-A user will be able to sign up for the site with an option to add a new gender to the database. A user will be able to edit their profile and preferences. A user will be able to view the profiles of other users with matching gender preferences. Users will be able to send and receive messages. The message credit system will not be available.
+A user will be able to sign up for the site with an option to add a new gender to the database. A user will be able to edit their profile and preferences. A user will be able to view the profiles of other users with matching gender preferences. Messages and the message credit system will not be available.
 
 # Schedule
 
