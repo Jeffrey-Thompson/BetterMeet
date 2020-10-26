@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.conf import settings
 
 # Create your models here.
 class Profile(models.Model):
@@ -79,7 +80,7 @@ class Profile(models.Model):
         ('gym', 'Working Out')
     ]
 
-    image = models.ImageField()
+    image = models.ImageField(upload_to='./static/assets')
     message_credits = models.IntegerField(default=100)
     height = models.IntegerField()
     sex_drive = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
@@ -100,6 +101,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return (f'{self.user.username} Profile')
+
 
 class Preferences(models.Model):
     body_type_choices = [  
