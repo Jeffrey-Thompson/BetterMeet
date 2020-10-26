@@ -12,19 +12,19 @@ A user will be able to sign up for the site with an option to add a new gender t
 # Schedule
 
 Phase 1
-Monday-Project approval, Django set-up, Build models
-Tuesday-Sign-up Forms/Image upload
-Wednesday-Profile page and user index
+<br>Monday-Project approval, Django set-up, Build models
+<br>Tuesday-Sign-up Forms/Image upload
+<br>Wednesday-Profile page and user index
 
 
 Phase 2
-Thursday-Messages
-Friday-Functional MVP
-Weekend-Base styling
-Monday-Deployment
+<br>Thursday-Messages
+<br>Friday-Functional MVP
+<br>Weekend-Base styling
+<br>Monday-Deployment
 
 
 Phase 3
-Tuesday- Stretch goal: Message credits
-Wednesday-Final styling
-Thursday-Build database 
+<br>Tuesday- Stretch goal: Message credits
+<br>Wednesday-Final styling
+<br>Thursday-Build database 
