@@ -1,6 +1,23 @@
 .hero {
+    /* photo source https://www.hermoney.com/borrow/debt/should-you-date-someone-with-a-lot-of-debt/ */
     background-image: url("../assets/couple_on_date.jpg");
     background-size: cover;
     height: 487px;
+    width: 700px;
     margin: 0 auto;
+}
+
+body {
+    /*  Photo by Khadeeja Yasser*/
+    background: url("../assets/khadeeja-yasser-FHT0KEOwtyg-unsplash.jpg"); 
+    background-size: cover;
+}
+
+.navbar {
+    background-color: rgba(216, 186, 200, 1);
+}
+
+#home-text {
+    background-color: rgba(216, 186, 200, 0.5);
+    color: black;
 }
