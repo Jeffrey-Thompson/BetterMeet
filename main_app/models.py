@@ -80,7 +80,7 @@ class Profile(models.Model):
         ('gym', 'Working Out')
     ]
 
-    image = models.ImageField(upload_to='./static/assets')
+    image = models.ImageField(upload_to='main_app/static/assets')
     message_credits = models.IntegerField(default=100)
     height = models.IntegerField()
     sex_drive = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])

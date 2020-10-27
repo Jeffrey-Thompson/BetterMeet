@@ -1,0 +1,6 @@
+.hero {
+    background-image: url("../assets/couple_on_date.jpg");
+    background-size: cover;
+    height: 487px;
+    margin: 0 auto;
+}
