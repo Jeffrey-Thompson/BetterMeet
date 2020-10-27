@@ -7,4 +7,5 @@ urlpatterns = [
 
     # Sign-up
     path('accounts/signup', views.signup, name='signup'),
+    path('accounts/signup_two', views.signup_two, name='signup_two'),
 ]
