@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 body_type_choices = [  
@@ -81,7 +82,7 @@ intereset_choices = [
 class Profile(models.Model):
 
 
-    image = models.ImageField(upload_to='main_app/static/assets', null=True)
+    image = CloudinaryField('image')
     message_credits = models.IntegerField(default=100)
     height = models.IntegerField('Height in centimeters', null=True)
     sex_drive = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True)

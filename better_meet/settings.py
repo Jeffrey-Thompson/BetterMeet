@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_app'
+    'main_app', 
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -122,3 +124,10 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+cloudinary.config(
+    cloud_name = os.environ.get('dvk80uh1a'),
+    api_key = os.environ.get('428299663787277'),
+    api_secret = os.environ.get('F3xJHuTQWs7AB5q3ox28RtzqNuo'),
+    secure = True
+)

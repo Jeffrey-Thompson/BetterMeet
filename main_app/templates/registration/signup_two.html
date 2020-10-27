@@ -24,6 +24,7 @@
 
     <form enctype='multipart/form-data' method="POST" action="{% url 'signup_two' %}">
         {% csrf_token %}
+        {{ from.image }}
         <div class="contianer">
             <div id="gender-box">
                 <h3>Gender</h3>
@@ -35,7 +36,7 @@
                 <input type="text" placeholder="Enter a new gender">
             </div>
             <div class="column col-6">
-                {{profile_form.as_p}}
+                
             </div>
             <input type="submit" class="btn btn-success" value="Submit">
         </div>
