@@ -39,6 +39,8 @@ def signup_two(request):
         gender = request.POST.get('gender')
         gender_custom = request.POST.get('gender_custom')
         description = request.POST.get('description')
+        interests = request.POST.get('interests')
+        print(interests)
         profile_form = Profile_Form(request.POST)
         if profile_form.is_valid():
             new_profile = profile_form.save(commit=False)
@@ -49,6 +51,7 @@ def signup_two(request):
                 new_profile.gender = gender
             new_profile.sex_drive = sex_drive
             new_profile.description = description
+            new_profile.interests = interests.split(',')
             print(new_profile)
             new_profile.save()
             return redirect('home')

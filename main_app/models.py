@@ -92,7 +92,7 @@ class Profile(models.Model):
     education = models.CharField(max_length=200, choices=education_choices, null=True)
     religion = models.CharField(max_length=200, choices=religion_choices, null=True)
     race = models.CharField(max_length=200, choices=race_choices, null=True)
-    interests = ArrayField(models.CharField(max_length=200, choices=intereset_choices))
+    interests = ArrayField(models.CharField(max_length=200, choices=intereset_choices),default=list)
     description = models.TextField('Describe yourself in your own words', null=True)
     has_kids = models.BooleanField('I currently have children', default=False)
     wants_kids = models.BooleanField('I want children in the future', default=False)
