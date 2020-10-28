@@ -11,34 +11,36 @@
     <link rel="stylesheet" href="{% static '/styles/main.css' %}">
     <title>Profile Creation</title>
 </head>
-<body class="signup">
-    <h1>Who Are You?</h1>
+<body>
+    <div class="signup container columns">
+        <h1 class="col-mx-auto">Who Are You?</h1>
 
-    {% if error_message %}
-        <div class="toast toast-error">
-            <button class="btn btn-clear float-right"></button>
-            {{error_message}}
-        </div>
-    {% else %}
-    {% endif %}
-
-    <form enctype='multipart/form-data' method="POST" action="{% url 'signup_two' %}">
-        {% csrf_token %}
-        <div class="contianer">
-            <div class="form-box">
-                <h3>Gender</h3>
-                {% for user in users %}
-                    <input type="radio" id={{user.profile.gender}} name="gender" value={{user.profile.gender}}>
-                    <label for={{user.profile.gender}}>{{user.profile.gender}}</label><br>
-                {% endfor %}
-                <input type="radio" id="enter" name="gender" value="enter">
-                <input type="text" placeholder="Enter a new gender">
+        {% if error_message %}
+            <div class="toast toast-error">
+                <button class="btn btn-clear float-right"></button>
+                {{error_message}}
             </div>
+        {% else %}
+        {% endif %}
+
+        <form enctype='multipart/form-data' method="POST" action="{% url 'signup_two' %}">
+            {% csrf_token %}
             <div class="columns">
-                <div class="column col-4 form-box">
+                
+                <div class="form-box column col-12 col-mx-auto">
+                    <h3 style="text-align:center">Gender</h3>
+                    {% for user in users %}
+                        <input type="radio" id={{user.profile.gender}} name="gender" value={{user.profile.gender}}>
+                        <label for={{user.profile.gender}}>{{user.profile.gender}}</label>
+                    {% endfor %}
+                    <input type="radio" id="enter" name="gender" value="enter">
+                    <input type="text" placeholder="Enter a new gender">
+                </div>
+                <div class="column col-1"></div>
+                <div class="column col-3 form-box">
                     {{ profile_form.as_p }}
                 </div>
-                <div class="column col-8">
+                <div class="column col-7">
                     <div class="form-box">
                         <h3>On a scale of 0 to 100: How much do you like sex?</h3>
                         <h6>Please answer honestly. Your answer will not be shown on your profile.</h6>
@@ -96,10 +98,11 @@
                         <textarea name="description" id="description" class="form-input" rows="11"></textarea>
                     </div>
                 </div>
+                <div class="col-1"></div>
+                <input type="submit" class="btn btn-success col-8 col-mx-auto" value="Submit">
             </div>
-            <input type="submit" class="btn btn-success" value="Submit">
-        </div>
-    </form>
+        </form>
+    </div>
 </body>
 </html>
 
