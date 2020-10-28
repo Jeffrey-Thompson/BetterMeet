@@ -22,6 +22,10 @@ body {
     color: black;
 }
 
-#gender-box {
+.form-box {
     border: 2px solid black;
+}
+
+.signup {
+    background: lightpink;
 }

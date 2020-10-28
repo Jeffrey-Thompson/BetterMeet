@@ -12,7 +12,7 @@ class User_Form(UserCreationForm):
 class Profile_Form(ModelForm):
     class Meta:
         model = Profile
-        fields = ['height', 'race', 'body_type', 'relationship_status', 'has_kids', 'wants_kids', 'smokes', 'drinks', 'religion', 'education', 'interests', 'description']
+        fields = ['height', 'race', 'body_type', 'relationship_status', 'religion', 'education', 'has_kids', 'wants_kids', 'smokes', 'drinks']
 
 class Image_Upload_Form(ModelForm):
     image = CloudinaryFileField(

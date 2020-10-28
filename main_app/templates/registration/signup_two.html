@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static '/styles/main.css' %}">
     <title>Profile Creation</title>
 </head>
-<body>
+<body class="signup">
     <h1>Who Are You?</h1>
 
     {% if error_message %}
@@ -24,19 +24,33 @@
 
     <form enctype='multipart/form-data' method="POST" action="{% url 'signup_two' %}">
         {% csrf_token %}
-        {{ from.image }}
         <div class="contianer">
-            <div id="gender-box">
+            <div class="form-box">
                 <h3>Gender</h3>
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="male">Male</label><br>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">Female</label><br>
+                {% for user in users %}
+                    <input type="radio" id={{user.profile.gender}} name="gender" value={{user.profile.gender}}>
+                    <label for={{user.profile.gender}}>{{user.profile.gender}}</label><br>
+                {% endfor %}
                 <input type="radio" id="enter" name="gender" value="enter">
                 <input type="text" placeholder="Enter a new gender">
             </div>
-            <div class="column col-6">
-                
+            <div class="columns">
+                <div class="column col-6">
+                    {{ profile_form.as_p }}
+                </div>
+                <div class="column col-6">
+                    <div class="form-box">
+                        <h3>On a scale of 0 to 100: How much do you like sex?</h3>
+                        <h6>Please answer honestly. Your answer will not be shown on your profile.</h6>
+                        <input type="range" class="slider tooltip" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
+                    </div>
+                    <div class="form-box">
+                    
+                    </div>
+                    <div class="form-box">
+                    
+                    </div>
+                </div>
             </div>
             <input type="submit" class="btn btn-success" value="Submit">
         </div>

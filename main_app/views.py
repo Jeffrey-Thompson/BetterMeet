@@ -32,27 +32,21 @@ def signup(request):
 def signup_two(request):
     error_message = ''
     user = request.user
-    instance = get_object_or_404(UserProfile, user=user)
+    users = User.objects.all()
     if request.method == 'POST':
-        image_form = Image_Upload_Form(request.POST, request.FILES, instance=instance)
         profile_form = Profile_Form(request.POST)
-        print(profile_form)
-        print(profile_form.is_valid())
-        print(request.body)
-        if profile_form.is_valid() and image_form.is_valid():
-            image_form.save()
+        if profile_form.is_valid():
             new_profile = profile_form.save(commit=False)
             new_profile.user = user
             new_profile.save()
             return redirect('home')
         else:
             error_message = "Something isn't right. Please check all fields and try again."
-    image_form = Image_Upload_Form()
     profile_form = Profile_Form()
     context = {
         'profile_form': profile_form, 
         'error_message': error_message,
-        'image_form': image_form
+        'users': users
     }
     return render(request, 'registration/signup_two.html', context)
 
