@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import User_Form, Profile_Form
 from django.contrib.auth.models import User
+from .models import Profile
 
 # Create your views here.
 
@@ -32,12 +33,23 @@ def signup(request):
 def signup_two(request):
     error_message = ''
     user = request.user
-    users = User.objects.all()
+    genders = Profile.objects.order_by().values('gender').distinct()
     if request.method == 'POST':
+        sex_drive = request.POST.get('sex_drive')
+        gender = request.POST.get('gender')
+        gender_custom = request.POST.get('gender_custom')
+        description = request.POST.get('description')
         profile_form = Profile_Form(request.POST)
         if profile_form.is_valid():
             new_profile = profile_form.save(commit=False)
             new_profile.user = user
+            if gender_custom:
+                new_profile.gender = gender_custom
+            else:
+                new_profile.gender = gender
+            new_profile.sex_drive = sex_drive
+            new_profile.description = description
+            print(new_profile)
             new_profile.save()
             return redirect('home')
         else:
@@ -46,7 +58,7 @@ def signup_two(request):
     context = {
         'profile_form': profile_form, 
         'error_message': error_message,
-        'users': users
+        'genders': genders
     }
     return render(request, 'registration/signup_two.html', context)
 

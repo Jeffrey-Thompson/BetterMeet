@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
     <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <script src="{% static '/scripts/signupTwo.js' %}"></script>
     <title>Profile Creation</title>
 </head>
 <body>
@@ -25,70 +26,72 @@
 
         <form enctype='multipart/form-data' method="POST" action="{% url 'signup_two' %}">
             {% csrf_token %}
+            
             <div class="columns">
-                
-                <div class="form-box column col-12 col-mx-auto">
+                <div class="container">
+                <div class="form-box column col-10 col-mx-auto">
                     <h3 style="text-align:center">Gender</h3>
-                    {% for user in users %}
-                        <input type="radio" id={{user.profile.gender}} name="gender" value={{user.profile.gender}}>
-                        <label for={{user.profile.gender}}>{{user.profile.gender}}</label>
+                    {% for option in genders %}
+                        <input type="radio" id={{option.gender}} name="gender" value={{option.gender}}>
+                        <label for={{option.gender}}>{{option.gender}}</label>
                     {% endfor %}
-                    <input type="radio" id="enter" name="gender" value="enter">
-                    <input type="text" placeholder="Enter a new gender">
+                    <input type="radio" id="enter" name="gender">
+                    <input type="text" name="gender_custom" placeholder="Enter a new gender">
+                </div>
                 </div>
                 <div class="column col-1"></div>
-                <div class="column col-3 form-box">
+                <div class="column col-3 form-box form-group">
                     {{ profile_form.as_p }}
                 </div>
                 <div class="column col-7">
                     <div class="form-box">
                         <h3>On a scale of 0 to 100: How much do you like sex?</h3>
                         <h6>Please answer honestly. Your answer will not be shown on your profile.</h6>
-                        <input type="range" class="slider tooltip" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
+                        <input type="range" name="sex_drive" class="slider tooltip" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
                     </div>
                     <div class="form-box">
                         <h3>What are your interests?</h3>
                         <div class="columns">
                             <div class="column">
-                                <input type="checkbox" id="tv" value="tv">
+                                <input type="checkbox" id="tv" value="tv" class="interests">
                                 <label for="tv"> Watching TV</label><br>
-                                <input type="checkbox" id="concert" value="concert">
+                                <input type="checkbox" id="concert" value="concert" class="interests">
                                 <label for="concert"> Concerts</label><br>
-                                <input type="checkbox" id="dance" value="dance">
+                                <input type="checkbox" id="dance" value="dance" class="interests">
                                 <label for="dance"> Dancing</label><br>
-                                <input type="checkbox" id="games" value="games">
+                                <input type="checkbox" id="games" value="games" class="interests">
                                 <label for="games"> Video Games</label><br>
-                                <input type="checkbox" id="garden" value="garden">
+                                <input type="checkbox" id="garden" value="garden" class="interests">
                                 <label for="garden"> Gardening</label><br>
-                                <input type="checkbox" id="travel" value="travel">
+                                <input type="checkbox" id="travel" value="travel" class="interests">
                                 <label for="travel"> Travel</label><br>
                             </div>
                             <div class="column">
-                                <input type="checkbox" id="hike" value="hike">
+                                <input type="checkbox" id="hike" value="hike" class="interests">
                                 <label for="hike"> Hiking</label><br>
-                                <input type="checkbox" id="movies" value="movies">
+                                <input type="checkbox" id="movies" value="movies" class="interests">
                                 <label for="movies"> Movies</label><br>
-                                <input type="checkbox" id="art" value="art">
+                                <input type="checkbox" id="art" value="art" class="interests">
                                 <label for="art"> Art</label><br>
-                                <input type="checkbox" id="music" value="music">
+                                <input type="checkbox" id="music" value="music" class="interests">
                                 <label for="music"> Music</label><br>
-                                <input type="checkbox" id="nightlife" value="nightlife">
+                                <input type="checkbox" id="nightlife" value="nightlife" class="interests">
                                 <label for="nightlife"> Nightlife</label><br>
-                                <input type="checkbox" id="volunteering" value="volunteering">
+                                <input type="checkbox" id="volunteering" value="volunteering" class="interests">
                                 <label for="volunteering"> Volunteering</label><br>
                             </div>
                             <div class="column">
-                                <input type="checkbox" id="playSport" value="playSport">
+                                <input type="checkbox" id="playSport" value="playSport" class="interests">
                                 <label for="playSport"> Playing Sports</label><br>
-                                <input type="checkbox" id="watchSport" value="watchSport">
+                                <input type="checkbox" id="watchSport" value="watchSport" class="interests">
                                 <label for="watchSport"> Watching Sports</label><br>
-                                <input type="checkbox" id="reading" value="reading">
+                                <input type="checkbox" id="reading" value="reading" class="interests">
                                 <label for="reading"> Reading</label><br>
-                                <input type="checkbox" id="religion" value="religion">
+                                <input type="checkbox" id="religion" value="religion" class="interests">
                                 <label for="religion"> Religion</label><br>
-                                <input type="checkbox" id="shopping" value="shopping">
+                                <input type="checkbox" id="shopping" value="shopping" class="interests">
                                 <label for="shopping"> Nightlife</label><br>
-                                <input type="checkbox" id="gym" value="gym">
+                                <input type="checkbox" id="gym" value="gym" class="interests">
                                 <label for="gym"> Working Out</label><br>
                             </div>
                         </div>
@@ -100,6 +103,7 @@
                 </div>
                 <div class="col-1"></div>
                 <input type="submit" class="btn btn-success col-8 col-mx-auto" value="Submit">
+                <input type="hidden" name="interests">
             </div>
         </form>
     </div>
