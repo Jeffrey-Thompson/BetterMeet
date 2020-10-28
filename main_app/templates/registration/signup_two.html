@@ -35,20 +35,65 @@
                 <input type="text" placeholder="Enter a new gender">
             </div>
             <div class="columns">
-                <div class="column col-6">
+                <div class="column col-4 form-box">
                     {{ profile_form.as_p }}
                 </div>
-                <div class="column col-6">
+                <div class="column col-8">
                     <div class="form-box">
                         <h3>On a scale of 0 to 100: How much do you like sex?</h3>
                         <h6>Please answer honestly. Your answer will not be shown on your profile.</h6>
                         <input type="range" class="slider tooltip" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
                     </div>
                     <div class="form-box">
-                    
+                        <h3>What are your interests?</h3>
+                        <div class="columns">
+                            <div class="column">
+                                <input type="checkbox" id="tv" value="tv">
+                                <label for="tv"> Watching TV</label><br>
+                                <input type="checkbox" id="concert" value="concert">
+                                <label for="concert"> Concerts</label><br>
+                                <input type="checkbox" id="dance" value="dance">
+                                <label for="dance"> Dancing</label><br>
+                                <input type="checkbox" id="games" value="games">
+                                <label for="games"> Video Games</label><br>
+                                <input type="checkbox" id="garden" value="garden">
+                                <label for="garden"> Gardening</label><br>
+                                <input type="checkbox" id="travel" value="travel">
+                                <label for="travel"> Travel</label><br>
+                            </div>
+                            <div class="column">
+                                <input type="checkbox" id="hike" value="hike">
+                                <label for="hike"> Hiking</label><br>
+                                <input type="checkbox" id="movies" value="movies">
+                                <label for="movies"> Movies</label><br>
+                                <input type="checkbox" id="art" value="art">
+                                <label for="art"> Art</label><br>
+                                <input type="checkbox" id="music" value="music">
+                                <label for="music"> Music</label><br>
+                                <input type="checkbox" id="nightlife" value="nightlife">
+                                <label for="nightlife"> Nightlife</label><br>
+                                <input type="checkbox" id="volunteering" value="volunteering">
+                                <label for="volunteering"> Volunteering</label><br>
+                            </div>
+                            <div class="column">
+                                <input type="checkbox" id="playSport" value="playSport">
+                                <label for="playSport"> Playing Sports</label><br>
+                                <input type="checkbox" id="watchSport" value="watchSport">
+                                <label for="watchSport"> Watching Sports</label><br>
+                                <input type="checkbox" id="reading" value="reading">
+                                <label for="reading"> Reading</label><br>
+                                <input type="checkbox" id="religion" value="religion">
+                                <label for="religion"> Religion</label><br>
+                                <input type="checkbox" id="shopping" value="shopping">
+                                <label for="shopping"> Nightlife</label><br>
+                                <input type="checkbox" id="gym" value="gym">
+                                <label for="gym"> Working Out</label><br>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-box">
-                    
+                        <h3>Describe yourself in your own words:</h3>
+                        <textarea name="description" id="description" class="form-input" rows="11"></textarea>
                     </div>
                 </div>
             </div>

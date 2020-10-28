@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
-from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 body_type_choices = [  
@@ -82,7 +82,7 @@ intereset_choices = [
 class Profile(models.Model):
 
 
-    image = CloudinaryField('image')
+    image = models.URLField('Link to a picture of you')
     message_credits = models.IntegerField(default=100)
     height = models.IntegerField('Height in centimeters', null=True)
     sex_drive = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], null=True)
@@ -92,7 +92,7 @@ class Profile(models.Model):
     education = models.CharField(max_length=200, choices=education_choices, null=True)
     religion = models.CharField(max_length=200, choices=religion_choices, null=True)
     race = models.CharField(max_length=200, choices=race_choices, null=True)
-    interests = ArrayField(models.CharField(max_length=200, choices=intereset_choices), blank=True)
+    interests = ArrayField(models.CharField(max_length=200, choices=intereset_choices))
     description = models.TextField('Describe yourself in your own words', null=True)
     has_kids = models.BooleanField('I currently have children', default=False)
     wants_kids = models.BooleanField('I want children in the future', default=False)
