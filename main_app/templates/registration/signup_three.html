@@ -52,6 +52,51 @@
             </div>
             <h3>Answers in this box will not be shown publicly.</h3>
         </div>
+        <div class="container columns">
+            <div class="form-box column col-4 container">
+                <h6>Height</h6>
+                <div class="columns">
+                    <div class="column col-5">
+                        <input type="text" name="min_height" max_length="3" size="3" placeholder="min">
+                        <p>Minimum (cm)</p>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="column col-5">
+                        <input type="text" name="max_height" max_length="3" size="3" placeholder="max">
+                        <p>Maximum (cm)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6>Race</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="race" id="white" onclick="changeRace(this)">
+                        <label for="white"> White</label><br>
+                        <input type="checkbox" class="race" id="black" onclick="changeRace(this)">
+                        <label for="black"> Black</label><br>
+                        <input type="checkbox" class="race" id="hispanic" onclick="changeRace(this)">
+                        <label for="hispanic"> Hispanic</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="race" id="asian" onclick="changeRace(this)">
+                        <label for="asian"> Asian</label><br>
+                        <input type="checkbox" class="race" id="native" onclick="changeRace(this)">
+                        <label for="native"> Native American</label><br>
+                        <input type="checkbox" class="race" id="mideast" onclick="changeRace(this)">
+                        <label for="mideast"> Middle Eastern</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="race" id="pacific" onclick="changeRace(this)">
+                        <label for="pacific"> Pacific Islander</label><br>
+                        <input type="checkbox" class="race" id="indian" onclick="changeRace(this)">
+                        <label for="indian"> East Indian</label><br>
+                        <input type="checkbox" class="race" id="other" onclick="changeRace(this)">
+                        <label for="other"> Other</label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
         </form>
     </div>
 </body>
