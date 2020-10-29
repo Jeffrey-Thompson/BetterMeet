@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,46 @@
 </head>
 <body>
     <div class="signup container columns">
-    
+        <h1 class="col-mx-auto">What do you want in a partner?</h1>
+
+        {% if error_message %}
+            <div class="toast toast-error">
+                <button class="btn btn-clear float-right"></button>
+                {{error_message}}
+            </div>
+        {% endif %}
+
+        <form action="{% url 'signup_three' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-box container columns">
+            <div class="form-box column col-6">
+                <h3>What gender(s) do you like?</h3>
+                {% for option in genders %}
+                    <input type="checkbox" id={{option.gender}} name="gender" value={{option.gender}}>
+                    <label for={{option.gender}}>{{option.gender}}</label>
+                {% endfor %}
+            </div>
+            <div class="form-box column col-6 container">
+                <div class="columns">
+                    <h6>On a scale from 0 to 100: How much do they like sex?</h6>
+                    <hr>
+                    <div class="column col-4">
+                        <input type="text" name="min_sex_drive" max_length="3" size="3" placeholder="0">
+                        <p>Minimum</p>
+                    </div>
+                    <div class="column col-4">
+                        <p>0 = No Sex, Please</p>
+                        <p>100 = Just Sex, Please</p>
+                    </div>
+                    <div class="column col-4">
+                        <input type="text" name="max_sex_drive" max_length="3" size="3" placeholder="100">
+                        <p>Maximum</p>
+                    </div>
+                </div>
+            </div>
+            <h3>Answers in this box will not be shown publicly.</h3>
+        </div>
+        </form>
     </div>
 </body>
 </html>

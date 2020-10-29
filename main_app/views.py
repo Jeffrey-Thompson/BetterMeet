@@ -54,7 +54,7 @@ def signup_two(request):
             new_profile.interests = interests.split(',')
             print(new_profile)
             new_profile.save()
-            return redirect('home')
+            return redirect('signup_three')
         else:
             error_message = "Something isn't right. Please check all fields and try again."
     profile_form = Profile_Form()
@@ -64,4 +64,17 @@ def signup_two(request):
         'genders': genders
     }
     return render(request, 'registration/signup_two.html', context)
+
+
+def signup_three(request):
+    error_message = ''
+    user = request.user
+    genders = Profile.objects.order_by().values('gender').distinct()
+
+
+    context = { 
+        'error_message': error_message,
+        'genders': genders
+    }
+    return render(request, 'registration/signup_three.html', context)
 
