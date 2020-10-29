@@ -117,10 +117,14 @@ class Preferences(models.Model):
     education = ArrayField(models.CharField(max_length=200, choices=education_choices))
     religion = ArrayField(models.CharField(max_length=200, choices=religion_choices))
     race = ArrayField(models.CharField(max_length=200, choices=race_choices))
-    smoke = ArrayField(models.BooleanField())
-    drink = ArrayField(models.BooleanField())
-    has_kids = ArrayField(models.BooleanField())
-    wants_kids = ArrayField(models.BooleanField())
+    smoke = models.BooleanField()
+    never_smoke = models.BooleanField()
+    drink = models.BooleanField()
+    never_drink = models.BooleanField()
+    has_kids = models.BooleanField()
+    has_no_kids = models.BooleanField()
+    wants_kids = models.BooleanField()
+    never_wants_kids = models.BooleanField()
 
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 

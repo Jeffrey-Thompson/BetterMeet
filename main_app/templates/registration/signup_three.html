@@ -25,6 +25,7 @@
         <form action="{% url 'signup_three' %}" method="POST">
         {% csrf_token %}
         <div class="form-box container columns">
+            
             <div class="form-box column col-6">
                 <h3>What gender(s) do you like?</h3>
                 {% for option in genders %}
@@ -35,26 +36,23 @@
             <div class="form-box column col-6 container">
                 <div class="columns">
                     <h6>On a scale from 0 to 100: How much do they like sex?</h6>
-                    <hr>
-                    <div class="column col-4">
+                    <div class="column col-6">
+                        <p>0 = No Sex, Please</p>
                         <input type="text" name="min_sex_drive" max_length="3" size="3" placeholder="0">
                         <p>Minimum</p>
                     </div>
-                    <div class="column col-4">
-                        <p>0 = No Sex, Please</p>
+                    <div class="column col-6">
                         <p>100 = Just Sex, Please</p>
-                    </div>
-                    <div class="column col-4">
                         <input type="text" name="max_sex_drive" max_length="3" size="3" placeholder="100">
                         <p>Maximum</p>
                     </div>
                 </div>
             </div>
-            <h3>Answers in this box will not be shown publicly.</h3>
-        </div>
+            <h3 class="col-mx-auto">Answers in this box will not be shown publicly.</h3>
+        </div><br><br>
         <div class="container columns">
             <div class="form-box column col-4 container">
-                <h6>Height</h6>
+                <h6 class="col-mx-auto" style="text-align:center">Height</h6>
                 <div class="columns">
                     <div class="column col-5">
                         <input type="text" name="min_height" max_length="3" size="3" placeholder="min">
@@ -68,15 +66,15 @@
                 </div>
             </div>
             <div class="form-box column col-4 container">
-                <h6>Race</h6>
+                <h6 class="col-mx-auto" style="text-align:center">Race</h6>
                 <div class="columns">
                     <div class="column">
                         <input type="checkbox" class="race" id="white" onclick="changeRace(this)">
                         <label for="white"> White</label><br>
                         <input type="checkbox" class="race" id="black" onclick="changeRace(this)">
-                        <label for="black"> Black</label><br>
-                        <input type="checkbox" class="race" id="hispanic" onclick="changeRace(this)">
-                        <label for="hispanic"> Hispanic</label><br>
+                        <label for="black"> Black</label><br><br>
+                        <input type="checkbox" class="race" id="pacific" onclick="changeRace(this)">
+                        <label for="pacific"> Pacific Islander</label><br>
                     </div>
                     <div class="column">
                         <input type="checkbox" class="race" id="asian" onclick="changeRace(this)">
@@ -87,11 +85,99 @@
                         <label for="mideast"> Middle Eastern</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="race" id="pacific" onclick="changeRace(this)">
-                        <label for="pacific"> Pacific Islander</label><br>
+                        <input type="checkbox" class="race" id="hispanic" onclick="changeRace(this)">
+                        <label for="hispanic"> Hispanic</label><br>
                         <input type="checkbox" class="race" id="indian" onclick="changeRace(this)">
                         <label for="indian"> East Indian</label><br>
                         <input type="checkbox" class="race" id="other" onclick="changeRace(this)">
+                        <label for="other"> Other</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Body Type</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="body_type" id="Slim" onclick="changeBody(this)">
+                        <label for="Slim"> Slim and Slender</label><br>
+                        <input type="checkbox" class="body_type" id="Fit" onclick="changeBody(this)">
+                        <label for="Fit"> Athletic and Fit</label><br>
+                        <input type="checkbox" class="body_type" id="Average" onclick="changeBody(this)">
+                        <label for="Average"> Average</label><br>
+                        <input type="checkbox" class="body_type" id="Muscular" onclick="changeBody(this)">
+                        <label for="Muscular"> Muscular</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="body_type" id="Curvy" onclick="changeBody(this)">
+                        <label for="Curvy"> Curvy</label><br>
+                        <input type="checkbox" class="body_type" id="Extra" onclick="changeBody(this)">
+                        <label for="Extra"> A Few Extra Pounds</label><br>
+                        <input type="checkbox" class="body_type" id="Heavy" onclick="changeBody(this)">
+                        <label for="Heavy"> Heavyset</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Relationship Status</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="relationship_status" id="single" onclick="changeRelationship(this)">
+                        <label for="single"> Never Married</label><br>
+                        <input type="checkbox" class="relationship_status" id="married" onclick="changeRelationship(this)">
+                        <label for="married"> Married</label><br>
+                        <input type="checkbox" class="relationship_status" id="seperated" onclick="changeRelationship(this)">
+                        <label for="seperated"> Currently Seperated</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="relationship_status" id="divorced" onclick="changeRelationship(this)">
+                        <label for="divorced"> Divorced</label><br>
+                        <input type="checkbox" class="relationship_status" id="widow" onclick="changeRelationship(this)">
+                        <label for="widow"> Widow or Widower</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Education Level</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="education" id="HS" onclick="changeEducation(this)">
+                        <label for="HS"> High School</label><br>
+                        <input type="checkbox" class="education" id="college" onclick="changeEducation(this)">
+                        <label for="college"> Some College</label><br>
+                        <input type="checkbox" class="education" id="associate" onclick="changeEducation(this)">
+                        <label for="associate"> Associates degree</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="education" id="bachelor" onclick="changeEducation(this)">
+                        <label for="bachelor"> Bachelors degree</label><br>
+                        <input type="checkbox" class="education" id="graduate" onclick="changeEducation(this)">
+                        <label for="graduate"> Graduate degree</label><br>
+                        <input type="checkbox" class="education" id="phd" onclick="changeEducation(this)">
+                        <label for="phd"> PhD or Post Doctoral</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Religion</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="religion" id="christian" onclick="changeReligion(this)">
+                        <label for="christian"> Christian</label><br>
+                        <input type="checkbox" class="religion" id="islam" onclick="changeReligion(this)">
+                        <label for="islam"> Islam</label><br>
+                        <input type="checkbox" class="religion" id="buddist" onclick="changeReligion(this)">
+                        <label for="buddist"> Buddist</label><br>
+                        <input type="checkbox" class="religion" id="hindu" onclick="changeReligion(this)">
+                        <label for="hindu"> Hindu</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="religion" id="jewish" onclick="changeReligion(this)">
+                        <label for="jewish"> Jewish</label><br>
+                        <input type="checkbox" class="religion" id="agnostic" onclick="changeReligion(this)">
+                        <label for="agnostic"> Agnostic</label><br>
+                        <input type="checkbox" class="religion" id="atheist" onclick="changeReligion(this)">
+                        <label for="atheist"> Atheist</label><br>
+                        <input type="checkbox" class="religion" id="other" onclick="changeReligion(this)">
                         <label for="other"> Other</label><br>
                     </div>
                 </div>
