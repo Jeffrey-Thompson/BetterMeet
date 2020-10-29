@@ -29,3 +29,18 @@ body {
 .signup {
     background-color: rgba(216, 186, 200, 0.6);
 }
+
+.profile_page {
+    background-color: rgba(216, 186, 200, 0.8);
+}
+
+.profile-img {
+    max-width: 40vw;
+}
+
+.profile-box {
+    margin: 5vw 0 1vw 1vw;
+    padding: 5vw 0 5vw 5vw;
+    border: 2px solid black;
+    border-radius: 20%;
+}

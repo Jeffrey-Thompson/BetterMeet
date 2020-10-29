@@ -19,6 +19,7 @@
         </section>
         <section class="navbar-section">
             {% if user.is_authenticated %}
+                <a href="{% url 'profile_show' user.profile.id %}" class="btn btn-link">See My Profile</a>
                 <a href="{% url 'logout' %}" class="btn btn-link">Log Out</a>
             {% else %}
                 <a href="{% url 'signup' %}" class="btn btn-link">Sign-up</a>
