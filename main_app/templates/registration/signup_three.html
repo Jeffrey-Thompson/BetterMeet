@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
     <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <script src="{% static '/scripts/signupThree.js' %}"></script>
     <title>Preferences</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
             <div class="form-box column col-6">
                 <h3>What gender(s) do you like?</h3>
                 {% for option in genders %}
-                    <input type="checkbox" id={{option.gender}} name="gender" value={{option.gender}}>
+                    <input type="checkbox" id={{option.gender}} name="gender" value={{option.gender}} onclick="changeGenders(this)">
                     <label for={{option.gender}}>{{option.gender}}</label>
                 {% endfor %}
             </div>
@@ -69,27 +70,27 @@
                 <h6 class="col-mx-auto" style="text-align:center">Race</h6>
                 <div class="columns">
                     <div class="column">
-                        <input type="checkbox" class="race" id="white" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="white" value="white" onclick="changeRace(this)">
                         <label for="white"> White</label><br>
-                        <input type="checkbox" class="race" id="black" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="black" value="black" onclick="changeRace(this)">
                         <label for="black"> Black</label><br><br>
-                        <input type="checkbox" class="race" id="pacific" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="pacific" value="pacific" onclick="changeRace(this)">
                         <label for="pacific"> Pacific Islander</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="race" id="asian" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="asian" value="asian" onclick="changeRace(this)">
                         <label for="asian"> Asian</label><br>
-                        <input type="checkbox" class="race" id="native" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="native" value="native" onclick="changeRace(this)">
                         <label for="native"> Native American</label><br>
-                        <input type="checkbox" class="race" id="mideast" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="mideast" value="mideast" onclick="changeRace(this)">
                         <label for="mideast"> Middle Eastern</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="race" id="hispanic" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="hispanic" value="hispanic" onclick="changeRace(this)">
                         <label for="hispanic"> Hispanic</label><br>
-                        <input type="checkbox" class="race" id="indian" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="indian" value="indian" onclick="changeRace(this)">
                         <label for="indian"> East Indian</label><br>
-                        <input type="checkbox" class="race" id="other" onclick="changeRace(this)">
+                        <input type="checkbox" class="race" id="other" value="other" onclick="changeRace(this)">
                         <label for="other"> Other</label><br>
                     </div>
                 </div>
@@ -98,21 +99,21 @@
                 <h6 class="col-mx-auto" style="text-align:center">Body Type</h6>
                 <div class="columns">
                     <div class="column">
-                        <input type="checkbox" class="body_type" id="Slim" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Slim" value="Slim" onclick="changeBody(this)">
                         <label for="Slim"> Slim and Slender</label><br>
-                        <input type="checkbox" class="body_type" id="Fit" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Fit" value="Fit" onclick="changeBody(this)">
                         <label for="Fit"> Athletic and Fit</label><br>
-                        <input type="checkbox" class="body_type" id="Average" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Average" value="Average" onclick="changeBody(this)">
                         <label for="Average"> Average</label><br>
-                        <input type="checkbox" class="body_type" id="Muscular" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Muscular" value="Muscular" onclick="changeBody(this)">
                         <label for="Muscular"> Muscular</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="body_type" id="Curvy" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Curvy" value="Curvy" onclick="changeBody(this)">
                         <label for="Curvy"> Curvy</label><br>
-                        <input type="checkbox" class="body_type" id="Extra" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Extra" value="Extra" onclick="changeBody(this)">
                         <label for="Extra"> A Few Extra Pounds</label><br>
-                        <input type="checkbox" class="body_type" id="Heavy" onclick="changeBody(this)">
+                        <input type="checkbox" class="body_type" id="Heavy" value="Heavy" onclick="changeBody(this)">
                         <label for="Heavy"> Heavyset</label><br>
                     </div>
                 </div>
@@ -121,17 +122,17 @@
                 <h6 class="col-mx-auto" style="text-align:center">Relationship Status</h6>
                 <div class="columns">
                     <div class="column">
-                        <input type="checkbox" class="relationship_status" id="single" onclick="changeRelationship(this)">
+                        <input type="checkbox" class="relationship_status" id="single" value="single" onclick="changeRelationship(this)">
                         <label for="single"> Never Married</label><br>
-                        <input type="checkbox" class="relationship_status" id="married" onclick="changeRelationship(this)">
+                        <input type="checkbox" class="relationship_status" id="married" value="married" onclick="changeRelationship(this)">
                         <label for="married"> Married</label><br>
-                        <input type="checkbox" class="relationship_status" id="seperated" onclick="changeRelationship(this)">
+                        <input type="checkbox" class="relationship_status" id="seperated" value="seperated" onclick="changeRelationship(this)">
                         <label for="seperated"> Currently Seperated</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="relationship_status" id="divorced" onclick="changeRelationship(this)">
+                        <input type="checkbox" class="relationship_status" id="divorced" value="divorced" onclick="changeRelationship(this)">
                         <label for="divorced"> Divorced</label><br>
-                        <input type="checkbox" class="relationship_status" id="widow" onclick="changeRelationship(this)">
+                        <input type="checkbox" class="relationship_status" id="widow" value="widow" onclick="changeRelationship(this)">
                         <label for="widow"> Widow or Widower</label><br>
                     </div>
                 </div>
@@ -140,19 +141,19 @@
                 <h6 class="col-mx-auto" style="text-align:center">Education Level</h6>
                 <div class="columns">
                     <div class="column">
-                        <input type="checkbox" class="education" id="HS" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="HS" value="HS" onclick="changeEducation(this)">
                         <label for="HS"> High School</label><br>
-                        <input type="checkbox" class="education" id="college" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="college" value="college" onclick="changeEducation(this)">
                         <label for="college"> Some College</label><br>
-                        <input type="checkbox" class="education" id="associate" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="associate" value="associate" onclick="changeEducation(this)">
                         <label for="associate"> Associates degree</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="education" id="bachelor" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="bachelor" value="bachelor" onclick="changeEducation(this)">
                         <label for="bachelor"> Bachelors degree</label><br>
-                        <input type="checkbox" class="education" id="graduate" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="graduate" value="graduate" onclick="changeEducation(this)">
                         <label for="graduate"> Graduate degree</label><br>
-                        <input type="checkbox" class="education" id="phd" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="phd" value="phd" onclick="changeEducation(this)">
                         <label for="phd"> PhD or Post Doctoral</label><br>
                     </div>
                 </div>
@@ -161,27 +162,90 @@
                 <h6 class="col-mx-auto" style="text-align:center">Religion</h6>
                 <div class="columns">
                     <div class="column">
-                        <input type="checkbox" class="religion" id="christian" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="christian" value="christian" onclick="changeReligion(this)">
                         <label for="christian"> Christian</label><br>
-                        <input type="checkbox" class="religion" id="islam" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="islam" value="islam" onclick="changeReligion(this)">
                         <label for="islam"> Islam</label><br>
-                        <input type="checkbox" class="religion" id="buddist" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="buddist" value="buddist" onclick="changeReligion(this)">
                         <label for="buddist"> Buddist</label><br>
-                        <input type="checkbox" class="religion" id="hindu" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="hindu" value="hindu" onclick="changeReligion(this)">
                         <label for="hindu"> Hindu</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="religion" id="jewish" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="jewish" value="jewish" onclick="changeReligion(this)">
                         <label for="jewish"> Jewish</label><br>
-                        <input type="checkbox" class="religion" id="agnostic" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="agnostic" value="agnostic" onclick="changeReligion(this)">
                         <label for="agnostic"> Agnostic</label><br>
-                        <input type="checkbox" class="religion" id="atheist" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="atheist" value="atheist" onclick="changeReligion(this)">
                         <label for="atheist"> Atheist</label><br>
-                        <input type="checkbox" class="religion" id="other" onclick="changeReligion(this)">
+                        <input type="checkbox" class="religion" id="other" value="other" onclick="changeReligion(this)">
                         <label for="other"> Other</label><br>
                     </div>
                 </div>
             </div>
+            <div class="column col-2"></div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Already has children?</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="has_kids" id="has_kids" name="has_kids">
+                        <label for="has_kids"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="has_no_kids" id="has_no_kids" name="has_no_kids">
+                        <label for="has_no_kids"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Wants future children?</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="wants_kids" id="wants_kids" name="wants_kids">
+                        <label for="wants_kids"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="never_wants_kids" id="never_wants_kids" name="never_wants_kids">
+                        <label for="never_wants_kids"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-2"></div>
+            <div class="column col-2"></div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Do they use tobacco?</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="smoke" id="smoke" name="smoke">
+                        <label for="smoke"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="never_smoke" id="never_smoke" name="never_smoke">
+                        <label for="never_smoke"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Do they drink alchohol?</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="drink" id="drink" name="drink">
+                        <label for="drink"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="never_drink" id="never_drink" name="never_drink">
+                        <label for="never_drink"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-2"></div>
+        <input type="submit" class="btn btn-success col-8 col-mx-auto" value="Submit">
+        <input type="hidden" name="genders" value="" id="genders_input">
+        <input type="hidden" name="body_type" value="" id="body_type_input">
+        <input type="hidden" name="relationship_status" value="" id="relationship_status_input">
+        <input type="hidden" name="education" value="" id="education_input">
+        <input type="hidden" name="religion" value="" id="religion_input">
+        <input type="hidden" name="race" value="" id="race_input">
         </div>
         </form>
     </div>
