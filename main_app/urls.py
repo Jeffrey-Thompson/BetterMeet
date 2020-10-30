@@ -12,4 +12,5 @@ urlpatterns = [
 
     # Profile
     path('profiles/<int:profile_id>/', views.profile_show, name="profile_show"),
+    path('profiles/index/', views.profile_index, name="profile_index"),
 ]

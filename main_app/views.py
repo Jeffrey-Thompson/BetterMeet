@@ -146,3 +146,28 @@ def profile_show(request, profile_id):
     }
     return render(request, 'profiles/profile_show.html', context)
 
+#Profile index
+def profile_index(request):
+    user = request.user
+    gender_preference = user.profile.preferences.genders
+    print(gender_preference)
+    profiles = Profile.objects.all()
+    print(profiles)
+    gender_matches = []
+    for profile in profiles:
+        if profile.id == user.profile.id:
+            continue
+        for gender in gender_preference:
+            if gender == profile.gender:
+                gender_matches.append(profile)
+    sexuality_match = []
+    for match in gender_matches:
+        for gender in match.preferences.genders:
+            if gender == user.profile.gender:
+                sexuality_match.append(match)
+    print(sexuality_match)
+    context = {
+        'matches': sexuality_match,
+        'title': f"{user.username}'s Matches"
+    }
+    return render(request, 'profiles/profile_index.html', context)
