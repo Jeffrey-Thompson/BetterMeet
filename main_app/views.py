@@ -178,7 +178,7 @@ def profile_edit(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     genders = Profile.objects.order_by().values('gender').distinct()
     profile_form = Profile_Form(instance=profile)
-    interests = profile.interests
+    interests = ['Watching TV', 'Concerts', 'Dancing', 'Video Games', 'Gardening', 'Travel', 'Cooking', 'Hiking', 'Movies', 'Art', 'Music', 'Nightlife', 'Volunteering', 'Camping', 'Playing Sports', 'Watching Sports', 'Reading', 'Religion', 'Shopping', 'Working Out', 'Board Games']
     context = {
         'title': 'Edit my profile',
         'genders': genders,
