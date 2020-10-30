@@ -58,6 +58,9 @@
                         <li>{{interest}}</li>
                     {% endfor %}
                     </ul>
+                    {% if request.user.id == profile.user.id %}
+                        <a href="{% url 'profile_edit' user.profile.id %}" class="btn btn-success">Edit My Profile</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="column col-5">
@@ -118,6 +121,9 @@
                                 <li>{{level}}</li>
                             {% endfor %}
                         </ul>
+                    {% if request.user.id == profile.user.id %}
+                        <a href="" class="btn btn-success">Edit My Preferences</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="column col-1"></div>

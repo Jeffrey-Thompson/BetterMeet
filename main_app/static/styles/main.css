@@ -42,7 +42,7 @@ body {
     margin: 5vw 0 1vw 1vw;
     padding: 5vw 0 5vw 5vw;
     border: 2px solid black;
-    border-radius: 20%;
+    border-radius: 10px;
 }
 
 .img-responsive {

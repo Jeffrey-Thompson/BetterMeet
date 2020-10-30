@@ -172,3 +172,18 @@ def profile_index(request):
         'user': user
     }
     return render(request, 'profiles/profile_index.html', context)
+
+# Profile Edit
+def profile_edit(request, profile_id):
+    profile = Profile.objects.get(id=profile_id)
+    genders = Profile.objects.order_by().values('gender').distinct()
+    profile_form = Profile_Form(instance=profile)
+    interests = profile.interests
+    context = {
+        'title': 'Edit my profile',
+        'genders': genders,
+        'profile': profile,
+        'profile_form': profile_form,
+        'interests': interests
+    }
+    return render(request, 'profiles/profile_edit.html', context)
