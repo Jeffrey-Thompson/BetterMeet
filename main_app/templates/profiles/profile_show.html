@@ -122,7 +122,7 @@
                             {% endfor %}
                         </ul>
                     {% if request.user.id == profile.user.id %}
-                        <a href="" class="btn btn-success">Edit My Preferences</a>
+                        <a href="{% url 'preference_edit' profile.preferences.id %}" class="btn btn-success">Edit My Preferences</a>
                     {% endif %}
                 </div>
             </div>

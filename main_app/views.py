@@ -177,6 +177,26 @@ def profile_index(request):
 def profile_edit(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     genders = Profile.objects.order_by().values('gender').distinct()
+    if request.method == 'POST':
+        sex_drive = request.POST.get('sex_drive')
+        gender = request.POST.get('gender')
+        gender_custom = request.POST.get('gender_custom')
+        description = request.POST.get('description')
+        interests = request.POST.get('interests')
+        print(interests)
+        profile_form = Profile_Form(request.POST, instance=profile)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            if gender_custom:
+                profile.gender = gender_custom
+            else:
+                profile.gender = gender
+            profile.sex_drive = sex_drive
+            profile.description = description
+            profile.interests = interests.split(',')
+            print(profile)
+            profile.save()
+            return redirect('profile_show', profile_id=profile.id)
     profile_form = Profile_Form(instance=profile)
     interests = ['Watching TV', 'Concerts', 'Dancing', 'Video Games', 'Gardening', 'Travel', 'Cooking', 'Hiking', 'Movies', 'Art', 'Music', 'Nightlife', 'Volunteering', 'Camping', 'Playing Sports', 'Watching Sports', 'Reading', 'Religion', 'Shopping', 'Working Out', 'Board Games']
     context = {
@@ -187,3 +207,9 @@ def profile_edit(request, profile_id):
         'interests': interests
     }
     return render(request, 'profiles/profile_edit.html', context)
+
+def preference_edit(request, preference_id):
+    context = {
+        'title': 'Edit my preferences',
+    }
+    return render(request, 'profiles/preferences_edit.html', context)

@@ -4,7 +4,7 @@
 {% block content %}
 <body onload="getInterests()">
     <div class="signup container columns">
-        <h1 class="col-mx-auto">Who Are You?</h1>
+        <h1 class="col-mx-auto">Edit Profile</h1>
 
         {% if error_message %}
             <div class="toast toast-error">
@@ -13,7 +13,7 @@
             </div>
         {% endif %}
 
-        <form enctype='multipart/form-data' method="POST" action="{% url 'signup_two' %}">
+        <form enctype='multipart/form-data' method="POST" action="{% url 'profile_edit' profile.id %}">
             {% csrf_token %}
             
             <div class="columns">

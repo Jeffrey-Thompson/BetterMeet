@@ -12,6 +12,7 @@ const getInterests = function() {
         }
         console.log(interests);
     }
+    document.getElementById('interests_input').value = interests.join()
 }
 
 const changeInterests = function(id) {
