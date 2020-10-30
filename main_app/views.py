@@ -209,7 +209,11 @@ def profile_edit(request, profile_id):
     return render(request, 'profiles/profile_edit.html', context)
 
 def preference_edit(request, preference_id):
+    genders = Profile.objects.order_by().values('gender').distinct()
+    preferences = Preferences.objects.get(id=preference_id)
     context = {
         'title': 'Edit my preferences',
+        'genders': genders,
+        'preferences': preferences
     }
     return render(request, 'profiles/preferences_edit.html', context)
