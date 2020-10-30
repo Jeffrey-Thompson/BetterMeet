@@ -44,3 +44,12 @@ body {
     border: 2px solid black;
     border-radius: 20%;
 }
+
+.img-responsive {
+    max-width: 40vw;
+    max-height: 25vw;
+}
+
+.card {
+    display: inline-block;
+}

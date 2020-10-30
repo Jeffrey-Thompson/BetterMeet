@@ -168,6 +168,7 @@ def profile_index(request):
     print(sexuality_match)
     context = {
         'matches': sexuality_match,
-        'title': f"{user.username}'s Matches"
+        'title': f"{user.username}'s Matches",
+        'user': user
     }
     return render(request, 'profiles/profile_index.html', context)
