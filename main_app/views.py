@@ -211,9 +211,19 @@ def profile_edit(request, profile_id):
 def preference_edit(request, preference_id):
     genders = Profile.objects.order_by().values('gender').distinct()
     preferences = Preferences.objects.get(id=preference_id)
+    races = ['White', 'Black', 'Pacific Islander', 'Asian', 'Native American', 'Middle Eastern', 'Hispanic', 'East Indian', 'Other']
+    body_types = ['Slim and Slender', 'Athletic and Fit', 'Average', 'Muscular', 'Curvy', 'A Few Extra Pounds', 'Heavyset']
+    relationship_statuses = ['Never Married', 'Married', 'Currently Seperated', 'Divorced', 'Widow or Widower']
+    educations = ['High School', 'Some College', 'Associates degree', 'Bachelors degree', 'Graduate degree', 'PhD or Post Doctoral']
+    religions = ['Christian', 'Islam', 'Buddist', 'Hindu', 'Jewish', 'Agnostic', 'Atheist', 'Other']
     context = {
         'title': 'Edit my preferences',
         'genders': genders,
-        'preferences': preferences
+        'preferences': preferences,
+        'races': races,
+        'body_types': body_types,
+        'relationship_statuses': relationship_statuses,
+        'educations': educations,
+        'religions': religions
     }
     return render(request, 'profiles/preferences_edit.html', context)

@@ -13,7 +13,12 @@
             <div class="form-box column col-6">
                 <h3>What gender(s) do you like?</h3>
                 {% for option in genders %}
-                    <input type="checkbox" id={{option.gender}} name="gender" value={{option.gender}} onclick="changeGenders(this)">
+                    <input type="checkbox" id={{option.gender}} name="gender" value={{option.gender}} onclick="changeGenders(this)"
+                    {% for choice in preferences.genders %}
+                        {% if choice == option.gender %}
+                            checked
+                        {% endif %}
+                    {% endfor %}>
                     <label for={{option.gender}}>{{option.gender}}</label>
                 {% endfor %}
             </div>
@@ -53,29 +58,24 @@
                 <h6 class="col-mx-auto" style="text-align:center">Race</h6>
                 <div class="columns">
                     <div class="column">
-                        <input type="checkbox" class="race" id="white" value="White" onclick="changeRace(this)">
-                        <label for="white"> White</label><br>
-                        <input type="checkbox" class="race" id="black" value="Black" onclick="changeRace(this)">
-                        <label for="black"> Black</label><br><br>
-                        <input type="checkbox" class="race" id="pacific" value="Pacific Islander" onclick="changeRace(this)">
-                        <label for="pacific"> Pacific Islander</label><br>
+                        {% for race in races %}
+                                    <input type="checkbox" id="{{forloop.counter}}_race" value="{{race}}" class="races" onclick="changeRace(this)"
+                                    {% for like in preferences.race %}
+                                        {% if like == race %}
+                                            checked
+                                        {% endif %}
+                                    {% endfor %}>
+                                    <label for="{{forloop.counter}}_race"> {{race}}</label><br>
+                                    {% if forloop.counter == 3 %}
+                                        </div>
+                                        <div class="column">
+                                    {% elif forloop.counter == 6 %}
+                                        </div>
+                                        <div class="column">
+                                    {% endif %}
+                                {% endfor %}
                     </div>
-                    <div class="column">
-                        <input type="checkbox" class="race" id="asian" value="Asian" onclick="changeRace(this)">
-                        <label for="asian"> Asian</label><br>
-                        <input type="checkbox" class="race" id="native" value="Native American" onclick="changeRace(this)">
-                        <label for="native"> Native American</label><br>
-                        <input type="checkbox" class="race" id="mideast" value="Middle Eastern" onclick="changeRace(this)">
-                        <label for="mideast"> Middle Eastern</label><br>
-                    </div>
-                    <div class="column">
-                        <input type="checkbox" class="race" id="hispanic" value="Hispanic" onclick="changeRace(this)">
-                        <label for="hispanic"> Hispanic</label><br>
-                        <input type="checkbox" class="race" id="indian" value="East Indian" onclick="changeRace(this)">
-                        <label for="indian"> East Indian</label><br>
-                        <input type="checkbox" class="race" id="other" value="Other" onclick="changeRace(this)">
-                        <label for="other"> Other</label><br>
-                    </div>
+                    
                 </div>
             </div>
             <div class="form-box column col-4 container">
@@ -132,9 +132,9 @@
                         <label for="associate"> Associates degree</label><br>
                     </div>
                     <div class="column">
-                        <input type="checkbox" class="education" id="bachelor" value="Bachelors Degree" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="bachelor" value="Bachelors degree" onclick="changeEducation(this)">
                         <label for="bachelor"> Bachelors degree</label><br>
-                        <input type="checkbox" class="education" id="graduate" value="Graduate Degree" onclick="changeEducation(this)">
+                        <input type="checkbox" class="education" id="graduate" value="Graduate degree" onclick="changeEducation(this)">
                         <label for="graduate"> Graduate degree</label><br>
                         <input type="checkbox" class="education" id="phd" value="PhD or Post Doctoral" onclick="changeEducation(this)">
                         <label for="phd"> PhD or Post Doctoral</label><br>
