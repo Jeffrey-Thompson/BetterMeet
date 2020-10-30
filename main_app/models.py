@@ -7,76 +7,78 @@ from django.conf import settings
 
 # Create your models here.
 body_type_choices = [  
-    ('Slim', 'Slim and Slender'),
-    ('Fit', 'Athletic and Fit'),
+    ('Slim and Slender', 'Slim and Slender'),
+    ('Athletic and Fit', 'Athletic and Fit'),
     ('Average', 'Average'),
     ('Muscular', 'Muscular'),
     ('Curvy', 'Curvy'),
-    ('Extra', 'A Few Extra Pounds'),
-    ('Heavy', 'Heavyset'),
+    ('A Few Extra Pounds', 'A Few Extra Pounds'),
+    ('Heavyset', 'Heavyset'),
 ]
 
 relationship_choices = [
-    ('single', 'Never Married'),
-    ('married', 'Married'),
-    ('seperated', 'Currently Seperated'),
-    ('divorced', 'Divorced'),
-    ('widow', 'Widow or Widower'),
+    ('Never Married', 'Never Married'),
+    ('Married', 'Married'),
+    ('Currently Seperated', 'Currently Seperated'),
+    ('Divorced', 'Divorced'),
+    ('Widow or Widower', 'Widow or Widower'),
 ]
 
 education_choices = [
-    ('HS', 'High School'),
-    ('college', 'Some College'),
-    ('associate', 'Associates degree'),
-    ('bachelor', 'Bachelors degree'),
-    ('graduate', 'Graduate degree'),
-    ('phd', 'PhD or Post Doctoral')
+    ('High School', 'High School'),
+    ('Some College', 'Some College'),
+    ('Associates degree', 'Associates degree'),
+    ('Bachelors degree', 'Bachelors degree'),
+    ('Graduate degree', 'Graduate degree'),
+    ('PhD or Post Doctoral', 'PhD or Post Doctoral')
 ]
 
 religion_choices = [
-    ('christian', 'Christian'),
-    ('islam', 'Islam'),
-    ('buddist', 'Buddist'),
-    ('hindu', 'Hindu'),
-    ('jewish', 'Jewish'),
-    ('agnostic', 'Agnostic'),
-    ('atheist', 'Atheist'),
-    ('other', 'Other'),
+    ('Christian', 'Christian'),
+    ('Islam', 'Islam'),
+    ('Buddist', 'Buddist'),
+    ('Hindu', 'Hindu'),
+    ('Jewish', 'Jewish'),
+    ('Agnostic', 'Agnostic'),
+    ('Atheist', 'Atheist'),
+    ('Other', 'Other'),
 ]
 
 race_choices = [
-    ('white', 'White'),
-    ('black', 'Black'),
-    ('hispanic', 'Hispanic'),
-    ('asian', 'Asian'),
-    ('native', 'Native American'),
-    ('mideast', 'Middle Eastern'),
-    ('pacific', 'Pacific Islander'),
-    ('indian', 'East Indian'),
-    ('other', 'Other'),
+    ('White', 'White'),
+    ('Black', 'Black'),
+    ('Hispanic', 'Hispanic'),
+    ('Asian', 'Asian'),
+    ('Native', 'Native American'),
+    ('Middle Eastern', 'Middle Eastern'),
+    ('Pacific Islander', 'Pacific Islander'),
+    ('East Indian', 'East Indian'),
+    ('Other', 'Other'),
 ]
 
 intereset_choices = [
-    ('tv', 'Watching TV'),
-    ('concert', 'Concerts'),
-    ('cook', 'Cooking'),
-    ('dance', 'Dancing'),
-    ('dine', 'Dining Out'),
-    ('games', 'Video Games'),
-    ('garden', 'Gardening'),
-    ('hike', 'Hiking'),
-    ('movies', 'Movies'),
-    ('art', 'Art'),
-    ('music', 'Music'),
-    ('nightlife', 'Nightlife'),
-    ('playSport', 'Playing Sports'),
-    ('watchSport', 'Watching Sports'),
-    ('reading', 'Reading'),
-    ('religion', 'Religion'),
-    ('shopping', 'Shopping'),
-    ('travel', 'Travel'),
-    ('volunteering', 'Volunteering'),
-    ('gym', 'Working Out')
+    ('Watching TV', 'Watching TV'),
+    ('Concerts', 'Concerts'),
+    ('Cooking', 'Cooking'),
+    ('Dancing', 'Dancing'),
+    ('Dining Out', 'Dining Out'),
+    ('Video Games', 'Video Games'),
+    ('Gardening', 'Gardening'),
+    ('Hiking', 'Hiking'),
+    ('Movies', 'Movies'),
+    ('Art', 'Art'),
+    ('Music', 'Music'),
+    ('Nightlife', 'Nightlife'),
+    ('Playing Sports', 'Playing Sports'),
+    ('Watching Sports', 'Watching Sports'),
+    ('Reading', 'Reading'),
+    ('Religion', 'Religion'),
+    ('Shopping', 'Shopping'),
+    ('Travel', 'Travel'),
+    ('Volunteering', 'Volunteering'),
+    ('Working Out', 'Working Out'),
+    ('Camping', 'Camping'),
+    ('Board Games', 'Board Games')
 ]
 
 class Profile(models.Model):

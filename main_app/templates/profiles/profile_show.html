@@ -2,7 +2,10 @@
 
 {% block content %}
     <div class="profile_page container columns">
-        <a href="{% url 'profile_index' %}" class="btn btn-primary col-mx-auto">Show Me My Matches</a>
+        {% if user.id == request.user.id %} 
+            <a href="{% url 'profile_index' %}" class="btn btn-primary col-mx-auto">Show Me My Matches</a>
+        {% else %}
+        {% endif %}
         <div class="container columns">
             <div class="column col-1"></div>
             <div class="column col-5">
@@ -12,11 +15,6 @@
             <div class="column col-5">
                 <h3 class="col-mx-auto" style="text-align:center">About Me:</h3>
                 <p class="profile-box">{{profile.description}}</p>
-                {% comment %} TODO remove before production {% endcomment %}
-                <h3>Remove these gender preferences before production</h3>
-                {% for gender in preferences.genders %}
-                    <h6>{{gender}}</h6>
-                {% endfor %}
             </div>
             <div class="column col-1"></div>
         </div>
