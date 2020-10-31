@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import User_Form, Profile_Form
 from django.contrib.auth.models import User
 from .models import Profile, Preferences
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -30,6 +31,7 @@ def signup(request):
     }
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def signup_two(request):
     error_message = ''
     user = request.user
@@ -65,7 +67,7 @@ def signup_two(request):
     }
     return render(request, 'registration/signup_two.html', context)
 
-
+@login_required
 def signup_three(request):
     error_message = ''
     user = request.user
@@ -134,6 +136,7 @@ def signup_three(request):
     return render(request, 'registration/signup_three.html', context)
 
 # Profiles
+@login_required
 def profile_show(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     user = profile.user
@@ -147,6 +150,7 @@ def profile_show(request, profile_id):
     return render(request, 'profiles/profile_show.html', context)
 
 #Profile index
+@login_required
 def profile_index(request):
     user = request.user
     gender_preference = user.profile.preferences.genders
@@ -174,29 +178,31 @@ def profile_index(request):
     return render(request, 'profiles/profile_index.html', context)
 
 # Profile Edit
+@login_required
 def profile_edit(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     genders = Profile.objects.order_by().values('gender').distinct()
     if request.method == 'POST':
-        sex_drive = request.POST.get('sex_drive')
-        gender = request.POST.get('gender')
-        gender_custom = request.POST.get('gender_custom')
-        description = request.POST.get('description')
-        interests = request.POST.get('interests')
-        print(interests)
-        profile_form = Profile_Form(request.POST, instance=profile)
-        if profile_form.is_valid():
-            profile = profile_form.save(commit=False)
-            if gender_custom:
-                profile.gender = gender_custom
-            else:
-                profile.gender = gender
-            profile.sex_drive = sex_drive
-            profile.description = description
-            profile.interests = interests.split(',')
-            print(profile)
-            profile.save()
-            return redirect('profile_show', profile_id=profile.id)
+        if request.user.id == profile.user.id:
+            sex_drive = request.POST.get('sex_drive')
+            gender = request.POST.get('gender')
+            gender_custom = request.POST.get('gender_custom')
+            description = request.POST.get('description')
+            interests = request.POST.get('interests')
+            print(interests)
+            profile_form = Profile_Form(request.POST, instance=profile)
+            if profile_form.is_valid():
+                profile = profile_form.save(commit=False)
+                if gender_custom:
+                    profile.gender = gender_custom
+                else:
+                    profile.gender = gender
+                profile.sex_drive = sex_drive
+                profile.description = description
+                profile.interests = interests.split(',')
+                print(profile)
+                profile.save()
+                return redirect('profile_show', profile_id=profile.id)
     profile_form = Profile_Form(instance=profile)
     interests = ['Watching TV', 'Concerts', 'Dancing', 'Video Games', 'Gardening', 'Travel', 'Cooking', 'Hiking', 'Movies', 'Art', 'Music', 'Nightlife', 'Volunteering', 'Camping', 'Playing Sports', 'Watching Sports', 'Reading', 'Religion', 'Shopping', 'Working Out', 'Board Games']
     context = {
@@ -208,6 +214,8 @@ def profile_edit(request, profile_id):
     }
     return render(request, 'profiles/profile_edit.html', context)
 
+# Preference Edit
+@login_required
 def preference_edit(request, preference_id):
     genders = Profile.objects.order_by().values('gender').distinct()
     preferences = Preferences.objects.get(id=preference_id)
@@ -217,61 +225,61 @@ def preference_edit(request, preference_id):
     educations = ['High School', 'Some College', 'Associates degree', 'Bachelors degree', 'Graduate degree', 'PhD or Post Doctoral']
     religions = ['Christian', 'Islam', 'Buddist', 'Hindu', 'Jewish', 'Agnostic', 'Atheist', 'Other']
     if request.method == 'POST':
-        max_height = request.POST.get('max_height')
-        min_height = request.POST.get('min_height')
-        min_sex_drive = request.POST.get('min_sex_drive')
-        max_sex_drive = request.POST.get('max_sex_drive')
-        genders = request.POST.get('genders')
-        body_type = request.POST.get('body_type')
-        relationship_status = request.POST.get('relationship_status')
-        education = request.POST.get('education')
-        religion = request.POST.get('religion')
-        race = request.POST.get('race')
-        smoke = request.POST.get('smoke')
-        if not smoke:
-            smoke = False
-        never_smoke = request.POST.get('never_smoke')
-        if not never_smoke:
-            never_smoke = False
-        drink = request.POST.get('drink')
-        if not drink:
-            drink = False
-        never_drink = request.POST.get('never_drink')
-        if not never_drink:
-            never_drink = False
-        has_kids = request.POST.get('has_kids')
-        if not has_kids:
-            has_kids = False
-        has_no_kids = request.POST.get('has_no_kids')
-        if not has_no_kids:
-            has_no_kids = False
-        wants_kids = request.POST.get('wants_kids')
-        if not wants_kids:
-            wants_kids = False
-        never_wants_kids = request.POST.get('never_wants_kids')
-        if not never_wants_kids:
-            never_wants_kids = False
-        
+        if request.user.id == preferences.profile.user.id:
+            max_height = request.POST.get('max_height')
+            min_height = request.POST.get('min_height')
+            min_sex_drive = request.POST.get('min_sex_drive')
+            max_sex_drive = request.POST.get('max_sex_drive')
+            genders = request.POST.get('genders')
+            body_type = request.POST.get('body_type')
+            relationship_status = request.POST.get('relationship_status')
+            education = request.POST.get('education')
+            religion = request.POST.get('religion')
+            race = request.POST.get('race')
+            smoke = request.POST.get('smoke')
+            if not smoke:
+                smoke = False
+            never_smoke = request.POST.get('never_smoke')
+            if not never_smoke:
+                never_smoke = False
+            drink = request.POST.get('drink')
+            if not drink:
+                drink = False
+            never_drink = request.POST.get('never_drink')
+            if not never_drink:
+                never_drink = False
+            has_kids = request.POST.get('has_kids')
+            if not has_kids:
+                has_kids = False
+            has_no_kids = request.POST.get('has_no_kids')
+            if not has_no_kids:
+                has_no_kids = False
+            wants_kids = request.POST.get('wants_kids')
+            if not wants_kids:
+                wants_kids = False
+            never_wants_kids = request.POST.get('never_wants_kids')
+            if not never_wants_kids:
+                never_wants_kids = False
             
-        preferences.max_height = max_height
-        preferences.min_height = min_height
-        preferences.min_sex_drive = min_sex_drive
-        preferences.max_sex_drive = max_sex_drive
-        preferences.smoke = smoke
-        preferences.never_smoke = never_smoke
-        preferences.drink = drink
-        preferences.has_kids = has_kids
-        preferences.has_no_kids = has_no_kids
-        preferences.wants_kids = wants_kids
-        preferences.never_wants_kids = never_wants_kids
-        
-        preferences.genders = genders.split(',')
-        preferences.body_type = body_type.split(',')
-        preferences.relationship_status = relationship_status.split(',')
-        preferences.education = education.split(',')
-        preferences.religion = religion.split(',')
-        preferences.race = race.split(',')
-        preferences.save()
+            preferences.max_height = max_height
+            preferences.min_height = min_height
+            preferences.min_sex_drive = min_sex_drive
+            preferences.max_sex_drive = max_sex_drive
+            preferences.smoke = smoke
+            preferences.never_smoke = never_smoke
+            preferences.drink = drink
+            preferences.has_kids = has_kids
+            preferences.has_no_kids = has_no_kids
+            preferences.wants_kids = wants_kids
+            preferences.never_wants_kids = never_wants_kids
+            
+            preferences.genders = genders.split(',')
+            preferences.body_type = body_type.split(',')
+            preferences.relationship_status = relationship_status.split(',')
+            preferences.education = education.split(',')
+            preferences.religion = religion.split(',')
+            preferences.race = race.split(',')
+            preferences.save()
         return redirect ('profile_show', profile_id=preferences.profile.id)
     context = {
         'title': 'Edit my preferences',
@@ -284,3 +292,10 @@ def preference_edit(request, preference_id):
         'religions': religions
     }
     return render(request, 'profiles/preferences_edit.html', context)
+
+# User Delete
+@login_required
+def user_delete(request, user_id):
+    if request.user.id == user_id:
+        User.objects.get(id=user_id).delete()
+        return redirect('home')

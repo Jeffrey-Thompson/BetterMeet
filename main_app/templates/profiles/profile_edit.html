@@ -73,10 +73,26 @@
                 <div class="col-1"></div>
                 <input type="submit" class="btn btn-success col-8 col-mx-auto" value="Submit">
                 <input type="hidden" name="interests" value="" id="interests_input">
-            </div>
+            </div><br><br>
         </form>
+        <button class="btn btn-error col-4 col-mx-auto" id="delete-btn">Delete My Profile</button>
     </div>
 </body>
+
+<div class="modal" id="modal-id">
+    <a href="#close" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+            <div class="modal-title h5">Are You Sure You Want to Delete Your Profile?</div>
+        </div>
+    <div class="modal-body">
+        <div class="content">
+            <a href="{% url 'user_delete' profile.user.id %}" class="btn btn-error">Yes, I want to die alone.</a>
+            <button class="btn btn-success" id="close_modal">No, Keep my profile. I want to be happy.</button>
+        </div>
+    </div>
+</div>
 
 <script src="{% static '/scripts/profileEdit.js' %}"> </script>
 {% endblock content %}

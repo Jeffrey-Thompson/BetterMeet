@@ -10,7 +10,6 @@ const getInterests = function() {
             const value = allInterests[index].value;
             interests.push(value);
         }
-        console.log(interests);
     }
     document.getElementById('interests_input').value = interests.join()
 }
@@ -27,3 +26,15 @@ const changeInterests = function(id) {
     console.log(interests);
     document.getElementById('interests_input').value = interests.join()
 }
+
+const openModal = function() {
+    document.getElementById('modal-id').classList.add('active');
+}
+
+const closeModel = function() {
+    document.getElementById('modal-id').classList.remove('active');
+}
+
+document.getElementById('delete-btn').addEventListener('click', openModal);
+document.querySelector('.btn-clear').addEventListener('click', closeModel);
+document.getElementById('close_modal').addEventListener('click', closeModel);
