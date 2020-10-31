@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <h1>Sign Up</h1>
@@ -11,9 +12,9 @@
 {% else %}
 {% endif %}
 
-<form method="POST" action="{% url 'signup' %}">
+<form method="POST" action="{% url 'signup' %}" class="uniForm">
     {% csrf_token %}
-    {{form.as_p}}
+    {{form|crispy}}
     <input type="submit" class="btn btn-success" value="signup">
 </form>
 {% endblock content %}
