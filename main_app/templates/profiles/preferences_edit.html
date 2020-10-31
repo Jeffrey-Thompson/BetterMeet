@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<body>
+<body onload="getData()">
     <div class="signup container columns">
         <h1 class="col-mx-auto">Edit Preferences</h1>
 
@@ -13,13 +13,13 @@
             <div class="form-box column col-6">
                 <h3>What gender(s) do you like?</h3>
                 {% for option in genders %}
-                    <input type="checkbox" id={{option.gender}} name="gender" value={{option.gender}} onclick="changeGenders(this)"
+                    <input type="checkbox" id={{forloop.counter}}_gender name="gender" class='genders' value="{{option.gender}}" onclick="changeGenders(this)"
                     {% for choice in preferences.genders %}
                         {% if choice == option.gender %}
                             checked
                         {% endif %}
                     {% endfor %}>
-                    <label for={{option.gender}}>{{option.gender}}</label>
+                    <label for={{forloop.counter}}_gender>{{option.gender}}</label>
                 {% endfor %}
             </div>
             <div class="form-box column col-6 container">
@@ -82,7 +82,7 @@
                 <div class="columns">
                     <div class="column">
                         {% for body_type in body_types %}
-                            <input type="checkbox" id="{{forloop.counter}}_body_type" value="{{body_type}}" class="body_types" onclick="changeBodyType(this)"
+                            <input type="checkbox" id="{{forloop.counter}}_body_type" value="{{body_type}}" class="body_types" onclick="changeBody(this)"
                             {% for like in preferences.body_type %}
                                 {% if like == body_type %}
                                     checked
@@ -249,4 +249,5 @@
     </div>
 </body> 
 
+<script src="{% static '/scripts/preferenceEdit.js' %}"> </script>
 {% endblock content %}
