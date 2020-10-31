@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body onload="getData()">
+    <div class="signup container columns">
+        <h1 class="col-mx-auto">Edit Preferences</h1>
+
+        <form action="{% url 'preference_edit' preferences.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-box container columns">
+            
+            <div class="form-box column col-6">
+                <h3>What gender(s) do you like?</h3>
+                {% for option in genders %}
+                    <input type="checkbox" id={{forloop.counter}}_gender name="gender" class='genders' value="{{option.gender}}" onclick="changeGenders(this)"
+                    {% for choice in preferences.genders %}
+                        {% if choice == option.gender %}
+                            checked
+                        {% endif %}
+                    {% endfor %}>
+                    <label for={{forloop.counter}}_gender>{{option.gender}}</label>
+                {% endfor %}
+            </div>
+            <div class="form-box column col-6 container">
+                <div class="columns">
+                    <h6>On a scale from 0 to 100: How much do they like sex?</h6>
+                    <div class="column col-6">
+                        <p>0 = No Sex, Please</p>
+                        <input type="text" name="min_sex_drive" max_length="3" size="3" value={{preferences.min_sex_drive}}>
+                        <p>Minimum</p>
+                    </div>
+                    <div class="column col-6">
+                        <p>100 = Just Sex, Please</p>
+                        <input type="text" name="max_sex_drive" max_length="3" size="3" value={{preferences.max_sex_drive}}>
+                        <p>Maximum</p>
+                    </div>
+                </div>
+            </div>
+            <h3 class="col-mx-auto">Answers in this box will not be shown publicly.</h3>
+        </div><br><br>
+        <div class="container columns">
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Height</h6>
+                <div class="columns">
+                    <div class="column col-5">
+                        <input type="text" name="min_height" max_length="3" size="3" value={{preferences.min_height}}>
+                        <p>Minimum (cm)</p>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="column col-5">
+                        <input type="text" name="max_height" max_length="3" size="3" value={{preferences.max_height}}>
+                        <p>Maximum (cm)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Race</h6>
+                <div class="columns">
+                    <div class="column">
+                        {% for race in races %}
+                            <input type="checkbox" id="{{forloop.counter}}_race" value="{{race}}" class="races" onclick="changeRace(this)"
+                            {% for like in preferences.race %}
+                                {% if like == race %}
+                                    checked
+                                {% endif %}
+                            {% endfor %}>
+                            <label for="{{forloop.counter}}_race"> {{race}}</label><br>
+                            {% if forloop.counter == 3 %}
+                                </div>
+                                <div class="column">
+                            {% elif forloop.counter == 6 %}
+                                </div>
+                                <div class="column">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Body Type</h6>
+                <div class="columns">
+                    <div class="column">
+                        {% for body_type in body_types %}
+                            <input type="checkbox" id="{{forloop.counter}}_body_type" value="{{body_type}}" class="body_types" onclick="changeBody(this)"
+                            {% for like in preferences.body_type %}
+                                {% if like == body_type %}
+                                    checked
+                                {% endif %}
+                            {% endfor %}>
+                            <label for="{{forloop.counter}}_body_type"> {{body_type}}</label><br>
+                            {% if forloop.counter == 4 %}
+                                </div>
+                                <div class="column">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Relationship Status</h6>
+                <div class="columns">
+                    <div class="column">
+                        {% for relationship in relationship_statuses %}
+                                <input type="checkbox" id="{{forloop.counter}}_relationship" value="{{relationship}}" class="relationship_statuses" onclick="changeRelationship(this)"
+                                {% for like in preferences.relationship_status %}
+                                    {% if like == relationship %}
+                                        checked
+                                    {% endif %}
+                                {% endfor %}>
+                                <label for="{{forloop.counter}}_relationship"> {{relationship}}</label><br>
+                                {% if forloop.counter == 3 %}
+                                    </div>
+                                    <div class="column">
+                                {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Education Level</h6>
+                <div class="columns">
+                    <div class="column">
+                        {% for education in educations %}
+                                <input type="checkbox" id="{{forloop.counter}}_education" value="{{education}}" class="educations" onclick="changeEducation(this)"
+                                {% for like in preferences.education %}
+                                    {% if like == education %}
+                                        checked
+                                    {% endif %}
+                                {% endfor %}>
+                                <label for="{{forloop.counter}}_education"> {{education}}</label><br>
+                                {% if forloop.counter == 3 %}
+                                    </div>
+                                    <div class="column">
+                                {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Religion</h6>
+                <div class="columns">
+                    <div class="column">
+                        {% for religion in religions %}
+                                <input type="checkbox" id="{{forloop.counter}}_religion" value="{{religion}}" class="religions" onclick="changeReligion(this)"
+                                {% for like in preferences.religion %}
+                                    {% if like == religion %}
+                                        checked
+                                    {% endif %}
+                                {% endfor %}>
+                                <label for="{{forloop.counter}}_religion"> {{religion}}</label><br>
+                                {% if forloop.counter == 4 %}
+                                    </div>
+                                    <div class="column">
+                                {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="column col-2"></div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Already has children?</h6>
+                <h6 class="col-mx-auto" style="text-align:center">(Select both for no preference)</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="has_kids" id="has_kids" name="has_kids" value="True" 
+                        {% if preferences.has_kids %}
+                            checked
+                        {% endif %}>
+                        <label for="has_kids"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="has_no_kids" id="has_no_kids" name="has_no_kids" value="True"
+                        {% if preferences.has_no_kids %}
+                            checked
+                        {% endif %}>
+                        <label for="has_no_kids"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Wants future children?</h6>
+                <h6 class="col-mx-auto" style="text-align:center">(Select both for no preference)</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="wants_kids" id="wants_kids" name="wants_kids" value="True"
+                        {% if preferences.wants_kids %}
+                            checked
+                        {% endif %}>
+                        <label for="wants_kids"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="never_wants_kids" id="never_wants_kids" name="never_wants_kids" value="True"
+                        {% if preferences.never_wants_kids %}
+                            checked
+                        {% endif %}>
+                        <label for="never_wants_kids"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-2"></div>
+            <div class="column col-2"></div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Do they use tobacco?</h6>
+                <h6 class="col-mx-auto" style="text-align:center">(Select both for no preference)</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="smoke" id="smoke" name="smoke" value="True"
+                        {% if preferences.smoke %}
+                            checked
+                        {% endif %}>
+                        <label for="smoke"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="never_smoke" id="never_smoke" name="never_smoke" value="True"
+                        {% if preferences.never_smoke %}
+                            checked
+                        {% endif %}>
+                        <label for="never_smoke"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box column col-4 container">
+                <h6 class="col-mx-auto" style="text-align:center">Do they drink alchohol?</h6>
+                <h6 class="col-mx-auto" style="text-align:center">(Select both for no preference)</h6>
+                <div class="columns">
+                    <div class="column">
+                        <input type="checkbox" class="drink" id="drink" name="drink" value="True"
+                        {% if preferences.drink %}
+                            checked
+                        {% endif %}>
+                        <label for="drink"> Yes</label><br>
+                    </div>
+                    <div class="column">
+                        <input type="checkbox" class="never_drink" id="never_drink" name="never_drink" value="True"
+                        {% if preferences.never_kids %}
+                            checked
+                        {% endif %}>
+                        <label for="never_drink"> No</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-2"></div>
+        <input type="submit" class="btn btn-success col-8 col-mx-auto" value="Submit">
+        <input type="hidden" name="genders" value="" id="genders_input">
+        <input type="hidden" name="body_type" value="" id="body_type_input">
+        <input type="hidden" name="relationship_status" value="" id="relationship_status_input">
+        <input type="hidden" name="education" value="" id="education_input">
+        <input type="hidden" name="religion" value="" id="religion_input">
+        <input type="hidden" name="race" value="" id="race_input">
+        </div>
+        </form>
+    </div>
+</body> 
+
+<script src="{% static '/scripts/preferenceEdit.js' %}"> </script>
+{% endblock content %}

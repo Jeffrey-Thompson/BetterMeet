@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="profile_page container columns">
+        {% if user.id == request.user.id %} 
+            <a href="{% url 'profile_index' %}" class="btn btn-primary col-mx-auto">Show Me My Matches</a>
+        {% else %}
+        {% endif %}
+        <div class="container columns">
+            <div class="column col-1"></div>
+            <div class="column col-5">
+                <h3 class="col-mx-auto" style="text-align:center">{{user.username}}</h3>
+                <img src="{{profile.image}}" alt="{{user.username}}" class="profile-img">
+            </div>
+            <div class="column col-5">
+                <h3 class="col-mx-auto" style="text-align:center">About Me:</h3>
+                <p class="profile-box">{{profile.description}}</p>
+            </div>
+            <div class="column col-1"></div>
+        </div>
+        <div class="container columns">
+            <div class="column col-1"></div>
+            <div class="column col-5">
+                <h3 class="col-mx-auto" style="text-align:center">Profile Information</h3>
+                <div class="profile-box">
+                    <ul>
+                        <li>Gender: {{profile.gender}}</li>
+                        <li>Height: {{profile.height}}cm</li>
+                        <li>Race: {{profile.get_race_display}}</li>
+                        <li>Relationship Status: {{profile.get_relationship_status_display}}</li>
+                        <li>Body Type: {{profile.get_body_type_display}}</li>
+                        <li>Religion: {{profile.get_religion_display}}</li>
+                        <li>Level of Education: {{profile.get_education_display}}</li>
+                        {% if profile.has_kids %}
+                            <li>I have children.</li>
+                        {% else %}
+                            <li>I do not have children.</li>
+                        {% endif %}
+                        {% if profile.wants_kids %}
+                            <li>I want to have children in the future.</li>
+                        {% else %}
+                            <li>I do not want to have children in the future.</li>
+                        {% endif %}
+                        {% if profile.smokes %}
+                            <li>I use tobacco.</li>
+                        {% else %}
+                            <li>I do not use tabacco.</li>
+                        {% endif %}
+                        {% if profile.drinks %}
+                            <li>I drink alcohol.</li>
+                        {% else %}
+                            <li>I do not drink alcohol.</li>
+                        {% endif %}
+                    </ul>
+                    <h4>Interests:</h4>
+                    <ul>
+                    {% for interest in profile.interests %}
+                        <li>{{interest}}</li>
+                    {% endfor %}
+                    </ul>
+                    {% if request.user.id == profile.user.id %}
+                        <a href="{% url 'profile_edit' user.profile.id %}" class="btn btn-success">Edit My Profile</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="column col-5">
+                <h3 class="col-mx-auto" style="text-align:center">The People I Like:</h3>
+                <div class="profile-box">
+                    <h6>They should be between {{preferences.min_height}} and {{preferences.max_height}}cm tall.</h6>
+                    {% if preferences.has_kids %}
+                        <h6>I would date someone who already has kids.</h6>
+                    {% endif %}
+                    {% if preferences.has_no_kids %}
+                        <h6>I would date someone who doesn't already have kids.</h6>
+                    {% endif %}
+                    {% if preferences.wants_kids %}
+                        <h6>I would date someone who wants to have kids.</h6>
+                    {% endif %}
+                    {% if preferences.never_wants_kids %}
+                        <h6>I would date someone who doesn't want kids in the future.</h6>
+                    {% endif %}
+                    {% if preferences.smoke %}
+                        <h6>I would date someone who uses tobacco.</h6>
+                    {% endif %}
+                    {% if preferences.never_smoke %}
+                        <h6>I would date someone who never uses tobacco.</h6>
+                    {% endif %}
+                    {% if preferences.drink %}
+                        <h6>I would date someone who drinks alcohol.</h6>
+                    {% endif %}
+                    {% if preferences.has_kids %}
+                        <h6>I would date someone who never drinks alcohol.</h6>
+                    {% endif %}
+                    <h6>Race:</h6>
+                        <ul>
+                            {% for race in preferences.race %}
+                                <li>{{race}}</li>
+                            {% endfor %}
+                        </ul>
+                    <h6>Relationship Status:</h6>
+                        <ul>
+                            {% for status in preferences.relationship_status %}
+                                <li>{{status}}</li>
+                            {% endfor %}
+                        </ul>
+                    <h6>Body Type:</h6>
+                        <ul>
+                            {% for body in preferences.body_type %}
+                                <li>{{body}}</li>
+                            {% endfor %}
+                        </ul>
+                    <h6>Religion</h6>
+                        <ul>
+                            {% for religion in preferences.religion %}
+                                <li>{{religion}}</li>
+                            {% endfor %}
+                        </ul>
+                    <h6>Education Level:</h6>
+                        <ul>
+                            {% for level in preferences.education %}
+                                <li>{{level}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% if request.user.id == profile.user.id %}
+                        <a href="{% url 'preference_edit' profile.preferences.id %}" class="btn btn-success">Edit My Preferences</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="column col-1"></div>
+        </div>
+    </div>
+
+{% endblock content %}
