@@ -181,3 +181,11 @@ class Utils(models.Model):
                 match_rating += 1
         print(match_rating)
         return match_rating
+
+    def common_interests(interests_one, interests_two):
+        interest_list = []
+        for user_interest in interests_one:
+            for match_interest in interests_two:
+                if user_interest == match_interest:
+                    interest_list.append(user_interest)
+        return interest_list

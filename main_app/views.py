@@ -143,12 +143,14 @@ def profile_show(request, profile_id):
     preferences = profile.preferences
     current_user = request.user
     category_match = Utils.compareMatch(current_user.profile, profile)
+    common_interests = Utils.common_interests(current_user.profile.interests, profile.interests)
     context = {
         'profile': profile,
         'user': user,
         'preferences': preferences,
         'title': f"{user.username}'s Profile",
         'category_match': category_match,
+        'common_interests': common_interests,
     }
     return render(request, 'profiles/profile_show.html', context)
 
