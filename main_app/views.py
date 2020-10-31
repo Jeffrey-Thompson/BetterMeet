@@ -216,6 +216,63 @@ def preference_edit(request, preference_id):
     relationship_statuses = ['Never Married', 'Married', 'Currently Seperated', 'Divorced', 'Widow or Widower']
     educations = ['High School', 'Some College', 'Associates degree', 'Bachelors degree', 'Graduate degree', 'PhD or Post Doctoral']
     religions = ['Christian', 'Islam', 'Buddist', 'Hindu', 'Jewish', 'Agnostic', 'Atheist', 'Other']
+    if request.method == 'POST':
+        max_height = request.POST.get('max_height')
+        min_height = request.POST.get('min_height')
+        min_sex_drive = request.POST.get('min_sex_drive')
+        max_sex_drive = request.POST.get('max_sex_drive')
+        genders = request.POST.get('genders')
+        body_type = request.POST.get('body_type')
+        relationship_status = request.POST.get('relationship_status')
+        education = request.POST.get('education')
+        religion = request.POST.get('religion')
+        race = request.POST.get('race')
+        smoke = request.POST.get('smoke')
+        if not smoke:
+            smoke = False
+        never_smoke = request.POST.get('never_smoke')
+        if not never_smoke:
+            never_smoke = False
+        drink = request.POST.get('drink')
+        if not drink:
+            drink = False
+        never_drink = request.POST.get('never_drink')
+        if not never_drink:
+            never_drink = False
+        has_kids = request.POST.get('has_kids')
+        if not has_kids:
+            has_kids = False
+        has_no_kids = request.POST.get('has_no_kids')
+        if not has_no_kids:
+            has_no_kids = False
+        wants_kids = request.POST.get('wants_kids')
+        if not wants_kids:
+            wants_kids = False
+        never_wants_kids = request.POST.get('never_wants_kids')
+        if not never_wants_kids:
+            never_wants_kids = False
+        
+            
+        preferences.max_height = max_height
+        preferences.min_height = min_height
+        preferences.min_sex_drive = min_sex_drive
+        preferences.max_sex_drive = max_sex_drive
+        preferences.smoke = smoke
+        preferences.never_smoke = never_smoke
+        preferences.drink = drink
+        preferences.has_kids = has_kids
+        preferences.has_no_kids = has_no_kids
+        preferences.wants_kids = wants_kids
+        preferences.never_wants_kids = never_wants_kids
+        
+        preferences.genders = genders.split(',')
+        preferences.body_type = body_type.split(',')
+        preferences.relationship_status = relationship_status.split(',')
+        preferences.education = education.split(',')
+        preferences.religion = religion.split(',')
+        preferences.race = race.split(',')
+        preferences.save()
+        return redirect ('profile_show', profile_id=preferences.profile.id)
     context = {
         'title': 'Edit my preferences',
         'genders': genders,
