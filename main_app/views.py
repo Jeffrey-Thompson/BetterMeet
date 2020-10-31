@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import User_Form, Profile_Form
 from django.contrib.auth.models import User
-from .models import Profile, Preferences
+from .models import Profile, Preferences, Utils
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -141,11 +141,14 @@ def profile_show(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     user = profile.user
     preferences = profile.preferences
+    current_user = request.user
+    category_match = Utils.compareMatch(current_user.profile, profile)
     context = {
         'profile': profile,
         'user': user,
         'preferences': preferences,
-        'title': f"{user.username}'s Profile"
+        'title': f"{user.username}'s Profile",
+        'category_match': category_match,
     }
     return render(request, 'profiles/profile_show.html', context)
 

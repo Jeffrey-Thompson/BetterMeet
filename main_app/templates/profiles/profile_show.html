@@ -15,13 +15,7 @@
             <div class="column col-5">
                 <h3 class="col-mx-auto" style="text-align:center">About Me:</h3>
                 <p class="profile-box">{{profile.description}}</p>
-            </div>
-            <div class="column col-1"></div>
-        </div>
-        <div class="container columns">
-            <div class="column col-1"></div>
-            <div class="column col-5">
-                <h3 class="col-mx-auto" style="text-align:center">Profile Information</h3>
+                <h3 class="col-mx-auto" style="text-align:center">Profile Information:</h3>
                 <div class="profile-box">
                     <ul>
                         <li>Gender: {{profile.gender}}</li>
@@ -52,17 +46,29 @@
                             <li>I do not drink alcohol.</li>
                         {% endif %}
                     </ul>
-                    <h4>Interests:</h4>
-                    <ul>
-                    {% for interest in profile.interests %}
-                        <li>{{interest}}</li>
-                    {% endfor %}
-                    </ul>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-1" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-1">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Interests
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for interest in profile.interests %}
+                                    <li>{{interest}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                     {% if request.user.id == profile.user.id %}
                         <a href="{% url 'profile_edit' user.profile.id %}" class="btn btn-success">Edit My Profile</a>
                     {% endif %}
                 </div>
             </div>
+            <div class="column col-1"></div>
+        </div>
+        <div class="container columns">
+            <div class="column col-1"></div>
             <div class="column col-5">
                 <h3 class="col-mx-auto" style="text-align:center">The People I Like:</h3>
                 <div class="profile-box">
@@ -91,39 +97,85 @@
                     {% if preferences.has_kids %}
                         <h6>I would date someone who never drinks alcohol.</h6>
                     {% endif %}
-                    <h6>Race:</h6>
-                        <ul>
-                            {% for race in preferences.race %}
-                                <li>{{race}}</li>
-                            {% endfor %}
-                        </ul>
-                    <h6>Relationship Status:</h6>
-                        <ul>
-                            {% for status in preferences.relationship_status %}
-                                <li>{{status}}</li>
-                            {% endfor %}
-                        </ul>
-                    <h6>Body Type:</h6>
-                        <ul>
-                            {% for body in preferences.body_type %}
-                                <li>{{body}}</li>
-                            {% endfor %}
-                        </ul>
-                    <h6>Religion</h6>
-                        <ul>
-                            {% for religion in preferences.religion %}
-                                <li>{{religion}}</li>
-                            {% endfor %}
-                        </ul>
-                    <h6>Education Level:</h6>
-                        <ul>
-                            {% for level in preferences.education %}
-                                <li>{{level}}</li>
-                            {% endfor %}
-                        </ul>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-2" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-2">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Race
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for race in preferences.race %}
+                                    <li>{{race}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-3" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-3">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Relationship Status
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for status in preferences.relationship_status %}
+                                    <li>{{status}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-4" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-4">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Body Type
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for body in preferences.body_type %}
+                                    <li>{{body}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-5" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-5">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Religion
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for religion in preferences.religion %}
+                                    <li>{{religion}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-6" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-6">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Education Level
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for level in preferences.education %}
+                                    <li>{{level}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                     {% if request.user.id == profile.user.id %}
                         <a href="{% url 'preference_edit' profile.preferences.id %}" class="btn btn-success">Edit My Preferences</a>
                     {% endif %}
+                </div>
+            </div>
+            <div class="column col-5">
+                <h3 class="col-mx-auto" style="text-align:center">How I Stack Up:</h3>
+                <div class="profile-box">
+                    <h5>You match their preferences in {{category_match}} out of 11 categories.</h5>
                 </div>
             </div>
             <div class="column col-1"></div>
