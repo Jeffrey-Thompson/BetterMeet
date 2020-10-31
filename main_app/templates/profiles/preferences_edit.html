@@ -8,7 +8,7 @@
 
         <form action="{% url 'preference_edit' preferences.id %}" method="POST">
         {% csrf_token %}
-        <div class="form-box container columns">
+        <div class="form-box container columns mx-1">
             
             <div class="form-box column col-6">
                 <h3>What gender(s) do you like?</h3>
@@ -23,17 +23,17 @@
                 {% endfor %}
             </div>
             <div class="form-box column col-6 container">
+                <h4 style="text-align:center">On a scale from 0 to 100: How much do they like sex?</h4>
                 <div class="columns">
-                    <h6>On a scale from 0 to 100: How much do they like sex?</h6>
                     <div class="column col-6">
-                        <p>0 = No Sex, Please</p>
                         <input type="text" name="min_sex_drive" max_length="3" size="3" value={{preferences.min_sex_drive}}>
-                        <p>Minimum</p>
+                        <span><strong>Minimum</strong></span>
+                        <span>0 = No Sex, Please</span>
                     </div>
                     <div class="column col-6">
-                        <p>100 = Just Sex, Please</p>
                         <input type="text" name="max_sex_drive" max_length="3" size="3" value={{preferences.max_sex_drive}}>
-                        <p>Maximum</p>
+                        <span><strong>Maximum</strong></span>
+                        <span>100 = Just Sex, Please</span>
                     </div>
                 </div>
             </div>

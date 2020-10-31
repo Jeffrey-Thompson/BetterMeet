@@ -24,14 +24,15 @@ body {
 
 .form-box {
     border: 2px solid black;
+    padding: 5px;
 }
 
 .signup {
-    background-color: rgba(216, 186, 200, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .profile_page {
-    background-color: rgba(216, 186, 200, 0.8);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .profile-img {
@@ -54,3 +55,13 @@ body {
     display: inline-block;
     padding: 5px;
 }
+.slider {
+    width: 95%;
+    padding-left: 2.5%;
+}
+
+.sex-box {
+    background-color: rgba(216, 186, 200, 0.5);
+    margin-left: 1px;
+}
+

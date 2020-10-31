@@ -38,10 +38,16 @@
                     {{ profile_form|crispy }}
                 </div>
                 <div class="column col-7">
-                    <div class="form-box">
-                        <h3>On a scale of 0 to 100: How much do you like sex?</h3>
-                        <h6>Please answer honestly. Your answer will not be shown on your profile.</h6>
+                    <div class="form-box columns sex-box container">
+                        <h3 class="col-12 col-mx-auto" style="text-align:center">On a scale of 0 to 100: How much do you like sex?</h3>
+                        <h6 class="col-12 col-mx-auto" style="text-align:center">Please answer honestly. Your answer will not be shown on your profile.</h6>
+                        <span class="col-3">I am Asexual.</span>
+                        <div class="col-6"></div>
+                        <span class="col-3 float-right" style="text-align:right">Conversation is optional.</span>
                         <input type="range" name="sex_drive" class="slider tooltip" min="0" max="100" value={{profile.sex_drive}} oninput="this.setAttribute('value', this.value);">
+                        <span class="col-1">0</span>
+                        <div class="col-10"></div>
+                        <span class="col-1" style="text-align:right">100</span>
                     </div>
                     <div class="form-box">
                         <h3>What are your interests?</h3>
@@ -68,7 +74,7 @@
                     </div>
                     <div class="form-box">
                         <h3>Describe yourself in your own words:</h3>
-                        <textarea name="description" id="description" class="form-input" rows="11">{{profile.description}}</textarea>
+                        <textarea name="description" id="description" class="form-input" rows="10">{{profile.description}}</textarea>
                     </div>
                 </div>
                 <div class="col-1"></div>
