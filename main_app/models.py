@@ -135,52 +135,51 @@ class Preferences(models.Model):
 
 class Utils(models.Model):
     def compareMatch(profile_one, profile_two):
-        match_rating = 0
+        category_match = 0
         if profile_one.height >= profile_two.preferences.min_height and profile_one.height <= profile_two.preferences.max_height:
-            match_rating += 1
+            category_match += 1
         if profile_one.sex_drive >= profile_two.preferences.min_sex_drive and profile_one.sex_drive <= profile_two.preferences.max_sex_drive:
-            match_rating += 1
+            category_match += 1
         if profile_one.has_kids:
             if profile_two.preferences.has_kids:
-                match_rating += 1
+                category_match += 1
         else:
             if profile_two.preferences.has_no_kids:
-                match_rating += 1
+                category_match += 1
         if profile_one.wants_kids:
             if profile_two.preferences.wants_kids:
-                match_rating += 1
+                category_match += 1
         else:
             if profile_two.preferences.never_wants_kids:
-                match_rating += 1
+                category_match += 1
         if profile_one.smokes:
             if profile_two.preferences.smoke:
-                match_rating += 1
+                category_match += 1
         else:
             if profile_two.preferences.never_smoke:
-                match_rating += 1
+                category_match += 1
         if profile_one.drinks:
             if profile_two.preferences.drink:
-                match_rating += 1
+                category_match += 1
         else:
             if profile_two.preferences.never_drink:
-                match_rating += 1
+                category_match += 1
         for race in profile_two.preferences.race:
             if profile_one.race == race:
-                match_rating += 1
+                category_match += 1
         for body_type in profile_two.preferences.body_type:
             if profile_one.body_type == body_type:
-                match_rating += 1
+                category_match += 1
         for relationship_status in profile_two.preferences.relationship_status:
             if profile_one.relationship_status == relationship_status:
-                match_rating += 1
+                category_match += 1
         for education in profile_two.preferences.education:
             if profile_one.education == education:
-                match_rating += 1
+                category_match += 1
         for religion in profile_two.preferences.religion:
             if profile_one.religion == religion:
-                match_rating += 1
-        print(match_rating)
-        return match_rating
+                category_match += 1
+        return category_match
 
     def common_interests(interests_one, interests_two):
         interest_list = []
@@ -189,3 +188,32 @@ class Utils(models.Model):
                 if user_interest == match_interest:
                     interest_list.append(user_interest)
         return interest_list
+
+    def match_rating(categories, interests):
+        rating = categories * 3
+        num_interests = len(interests)
+        if num_interests == 0:
+            rating = rating - 5
+        elif num_interests < 3:
+            rating = rating
+        elif num_interests < 7:
+            rating = rating + 3
+        elif num_interests < 10:
+            rating = rating + 6
+        elif num_interests < 15:
+            rating = rating + 10
+        elif num_interests < 17:
+            rating = rating + 15
+        else:
+            rating = rating + 17
+        if rating < 10:
+            score = "Awful"
+        elif rating < 20:
+            score = "Poor"
+        elif rating < 30:
+            score = "Average"
+        elif rating < 40:
+            score = "Good"
+        else:
+            score = "Great"
+        return score

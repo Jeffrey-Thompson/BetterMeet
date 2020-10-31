@@ -144,6 +144,7 @@ def profile_show(request, profile_id):
     current_user = request.user
     category_match = Utils.compareMatch(current_user.profile, profile)
     common_interests = Utils.common_interests(current_user.profile.interests, profile.interests)
+    match_rating = Utils.match_rating(category_match, common_interests)
     context = {
         'profile': profile,
         'user': user,
@@ -151,6 +152,7 @@ def profile_show(request, profile_id):
         'title': f"{user.username}'s Profile",
         'category_match': category_match,
         'common_interests': common_interests,
+        'match_rating': match_rating,
     }
     return render(request, 'profiles/profile_show.html', context)
 
