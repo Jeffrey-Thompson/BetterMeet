@@ -81,18 +81,8 @@ intereset_choices = [
     ('Board Games', 'Board Games')
 ]
 
-class Message(models.Model):
-    title = models.CharField(max_length=200),
-    body = models.TextField()
-
-    sender = models.ManyToManyField(Profile)
-    recipient = models.ManyToManyField(Profile)
-
-    def __str__(self):
-        return self.title
 
 class Profile(models.Model):
-
 
     image = models.URLField('Link to a picture of you')
     message_credits = models.IntegerField(default=100)
@@ -116,6 +106,16 @@ class Profile(models.Model):
     def __str__(self):
         return (f'{self.user.username} Profile')
 
+class Message(models.Model):
+
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+
+    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
+    recipient = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='recipient')
+
+    def __str__(self):
+        return self.title
 
 class Preferences(models.Model):
     

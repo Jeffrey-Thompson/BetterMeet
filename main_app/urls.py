@@ -15,5 +15,8 @@ urlpatterns = [
     path('profiles/<int:preference_id>/edit_preference', views.preference_edit, name="preference_edit"),
     path('profiles/<int:profile_id>/', views.profile_show, name="profile_show"),
     path('profiles/index/', views.profile_index, name="profile_index"),
-    path('profiles/<int:user_id>/delete', views.user_delete, name="user_delete")
+    path('profiles/<int:user_id>/delete', views.user_delete, name="user_delete"),
+
+    # Messages
+    path('messages/create/<int:recipient_id>', views.create_message, name="create_message")
 ]

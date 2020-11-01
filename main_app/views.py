@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .forms import User_Form, Profile_Form
+from .forms import User_Form, Profile_Form, Message_Form
 from django.contrib.auth.models import User
-from .models import Profile, Preferences, Utils
+from .models import Profile, Preferences, Utils, Message
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -306,3 +306,24 @@ def user_delete(request, user_id):
     if request.user.id == user_id:
         User.objects.get(id=user_id).delete()
         return redirect('home')
+
+# Create Message
+@login_required
+def create_message(request, recipient_id):
+    recipient = Profile.objects.get(id=recipient_id)
+    if request.method == 'POST':
+        message_form = Message_Form(request.POST)
+        if message_form.is_valid():
+            new_message = message_form.save(commit=False)
+            new_message.sender = request.user.profile
+            new_message.recipient = recipient
+            new_message.save()
+            return redirect('profile_index')
+    else:
+        message_form = Message_Form()
+    context = {
+        'title': 'Send Message',
+        'message_form': message_form,
+        'profile': recipient
+    }
+    return render(request, 'messages/create.html', context)

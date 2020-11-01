@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Create Message</h1>
+
+<form action="{% url 'create_message' profile.id %}" method="POST">
+    {% csrf_token %}
+    {{ message_form|crispy }}
+    <input type="submit" class="btn btn-success" value="Send">
+</form>
+
+{% endblock content %}

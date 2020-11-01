@@ -183,7 +183,7 @@
                     {% else %}
                         <span class="h3 text-success">{{match_rating}}</span><br><br>
                     {% endif %}
-                    <a href="" class="btn btn-success">Send Them A Message</a>
+                    <a href="{% url 'create_message' profile.id %}" class="btn btn-success">Send Them A Message</a>
                 </div>
             </div>
             <div class="column col-1"></div>
