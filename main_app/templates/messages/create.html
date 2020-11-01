@@ -2,12 +2,39 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Create Message</h1>
-
-<form action="{% url 'create_message' profile.id %}" method="POST">
-    {% csrf_token %}
-    {{ message_form|crispy }}
-    <input type="submit" class="btn btn-success" value="Send">
-</form>
-
+<div class="container columns profile_page">
+    <h1 class="column col-12 text-center">Send A Message</h1>
+    <div class="column col-1"></div>
+    <div class="column col-4">
+        <figure class="figure">
+            <img src="{{profile.image}}" alt="{{profile.user.username}}" class="img-responsive">
+            <figcaption class="figure-caption h3">{{profile.user.username}}</figcaption>
+        </figure>
+    </div>
+    <div class="columns col-6">
+        <form action="{% url 'create_message' profile.id %}" method="POST" class="form-horizontal">
+            <div class="form-group">
+                {% csrf_token %}
+                <input type="text" class="form-input" placeholder="Message Title" name="title">
+                <textarea class="form-input" placeholder="Say something sweet. Try talking about a common interest." rows="10" name="body"></textarea>
+                <span class="h3">Match Rating: </span>
+                    {% if match_rating == "Awful" or match_rating == "Poor" %}
+                        <span class="h3 text-error"> {{match_rating}}</span>
+                    {% else %}
+                        <span class="h3 text-success"> {{match_rating}}</span>
+                    {% endif %}
+                <input type="submit" class="btn btn-success col-ml-auto" value="Send Message">
+            </div>
+        </form>
+    </div>
+    <div class="column col-1"></div>
+    <div class="profile-box col-12">
+        <h3 class="text-center">Common Interests:</h3>
+        <ul class="interest_list">
+            {% for interest in common_interests %}
+                <li class="list_item h5">{{interest}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock content %}

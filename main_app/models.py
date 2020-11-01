@@ -110,12 +110,16 @@ class Message(models.Model):
 
     title = models.CharField(max_length=200)
     body = models.TextField()
+    date_created = models.DateTimeField(auto_now=True)
 
     sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
     recipient = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='recipient')
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-date_created']
 
 class Preferences(models.Model):
     

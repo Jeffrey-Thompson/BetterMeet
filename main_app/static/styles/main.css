@@ -65,3 +65,12 @@ body {
     margin-left: 1px;
 }
 
+.interest_list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.interest_list li {
+    display: inline;
+}

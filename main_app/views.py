@@ -145,6 +145,7 @@ def profile_show(request, profile_id):
     category_match = Utils.compareMatch(current_user.profile, profile)
     common_interests = Utils.common_interests(current_user.profile.interests, profile.interests)
     match_rating = Utils.match_rating(category_match, common_interests)
+    messages = Message.objects.filter(recipient_id=profile_id)[:5]
     context = {
         'profile': profile,
         'user': user,
@@ -153,6 +154,7 @@ def profile_show(request, profile_id):
         'category_match': category_match,
         'common_interests': common_interests,
         'match_rating': match_rating,
+        'messages': messages,
     }
     return render(request, 'profiles/profile_show.html', context)
 
@@ -161,9 +163,7 @@ def profile_show(request, profile_id):
 def profile_index(request):
     user = request.user
     gender_preference = user.profile.preferences.genders
-    print(gender_preference)
     profiles = Profile.objects.all()
-    print(profiles)
     gender_matches = []
     for profile in profiles:
         if profile.id == user.profile.id:
@@ -176,7 +176,6 @@ def profile_index(request):
         for gender in match.preferences.genders:
             if gender == user.profile.gender:
                 sexuality_match.append(match)
-    print(sexuality_match)
     context = {
         'matches': sexuality_match,
         'title': f"{user.username}'s Matches",
@@ -311,19 +310,21 @@ def user_delete(request, user_id):
 @login_required
 def create_message(request, recipient_id):
     recipient = Profile.objects.get(id=recipient_id)
+    current_user = request.user
+    category_match = Utils.compareMatch(current_user.profile, recipient)
+    common_interests = Utils.common_interests(current_user.profile.interests, recipient.interests)
+    match_rating = Utils.match_rating(category_match, common_interests)
     if request.method == 'POST':
-        message_form = Message_Form(request.POST)
-        if message_form.is_valid():
-            new_message = message_form.save(commit=False)
-            new_message.sender = request.user.profile
-            new_message.recipient = recipient
-            new_message.save()
-            return redirect('profile_index')
-    else:
-        message_form = Message_Form()
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        sender = request.user.profile
+        recipient = recipient
+        Message.objects.create(title=title, body=body, sender=sender, recipient=recipient)
+        return redirect('profile_index')
     context = {
         'title': 'Send Message',
-        'message_form': message_form,
-        'profile': recipient
+        'profile': recipient,
+        'common_interests': common_interests,
+        'match_rating': match_rating,
     }
     return render(request, 'messages/create.html', context)
