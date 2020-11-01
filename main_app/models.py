@@ -81,6 +81,16 @@ intereset_choices = [
     ('Board Games', 'Board Games')
 ]
 
+class Message(models.Model):
+    title = models.CharField(max_length=200),
+    body = models.TextField()
+
+    sender = models.ManyToManyField(Profile)
+    recipient = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return self.title
+
 class Profile(models.Model):
 
 
