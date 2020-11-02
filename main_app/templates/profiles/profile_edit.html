@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<body onload="getInterests()">
+    <div class="signup container columns">
+        <h1 class="col-mx-auto">Edit Profile</h1>
+
+        {% if error_message %}
+            <div class="toast toast-error">
+                <button class="btn btn-clear float-right"></button>
+                {{error_message}}
+            </div>
+        {% endif %}
+
+        <form enctype='multipart/form-data' method="POST" action="{% url 'profile_edit' profile.id %}">
+            {% csrf_token %}
+            
+            <div class="columns">
+                <div class="container">
+                    <div class="form-box column col-10 col-mx-auto">
+                        <h3 style="text-align:center">Gender</h3>
+                        {% for option in genders %}
+                            <input type="radio" id={{option.gender}} name="gender" value={{option.gender}}
+                            {% if option.gender == profile.gender %}
+                                checked
+                            {% endif %}>
+                            <label for={{option.gender}}>{{option.gender}}</label>
+                        {% endfor %}
+                        <hr>
+                        <h4 style="text-align:center">Or add a gender to our database</h4>
+                        <input type="text" name="gender_custom" placeholder="Enter a new gender" class="col-12">
+                    </div>
+                </div>
+                <div class="column col-1"></div>
+                <div class="column col-3 col-md-10 form-box form-group">
+                    {{ profile_form|crispy }}
+                </div>
+                <div class="column col-7 col-md-12">
+                    <div class="form-box columns sex-box container">
+                        <h3 class="col-12 col-mx-auto" style="text-align:center">On a scale of 0 to 100: How much do you like sex?</h3>
+                        <h6 class="col-12 col-mx-auto" style="text-align:center">Please answer honestly. Your answer will not be shown on your profile.</h6>
+                        <span class="col-3">I am Asexual.</span>
+                        <div class="col-6"></div>
+                        <span class="col-3 float-right" style="text-align:right">Conversation is optional.</span>
+                        <input type="range" name="sex_drive" class="slider tooltip" min="0" max="100" value={{profile.sex_drive}} oninput="this.setAttribute('value', this.value);">
+                        <span class="col-1">0</span>
+                        <div class="col-10"></div>
+                        <span class="col-1" style="text-align:right">100</span>
+                    </div>
+                    <div class="form-box">
+                        <h3>What are your interests?</h3>
+                        <div class="columns">
+                            <div class="column">
+                                {% for interest in interests %}
+                                    <input type="checkbox" id="{{forloop.counter}}_interest" value="{{interest}}" class="interests" onclick="changeInterests(this)"
+                                    {% for like in profile.interests %}
+                                        {% if like == interest %}
+                                            checked
+                                        {% endif %}
+                                    {% endfor %}>
+                                    <label for="{{forloop.counter}}_interest"> {{interest}}</label><br>
+                                    {% if forloop.counter == 7 %}
+                                        </div>
+                                        <div class="column">
+                                    {% elif forloop.counter == 14 %}
+                                        </div>
+                                        <div class="column">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-box">
+                        <h3>Describe yourself in your own words:</h3>
+                        <textarea name="description" id="description" class="form-input" rows="10">{{profile.description}}</textarea>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+                <input type="submit" class="btn btn-success col-8 col-mx-auto" value="Submit">
+                <input type="hidden" name="interests" value="" id="interests_input">
+            </div><br><br>
+        </form>
+        <button class="btn btn-error col-4 col-mx-auto" id="delete-btn">Delete My Profile</button>
+    </div>
+</body>
+
+<div class="modal" id="modal-id">
+    <a href="#close" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+            <div class="modal-title h5">Are You Sure You Want to Delete Your Profile?</div>
+        </div>
+    <div class="modal-body">
+        <div class="content">
+            <a href="{% url 'user_delete' profile.user.id %}" class="btn btn-error">Yes, I want to die alone.</a>
+            <button class="btn btn-success" id="close_modal">No, Keep my profile. I want to be happy.</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static '/scripts/profileEdit.js' %}"> </script>
+{% endblock content %}

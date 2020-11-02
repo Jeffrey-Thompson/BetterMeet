@@ -1,0 +1,104 @@
+.hero {
+    /* photo source https://www.hermoney.com/borrow/debt/should-you-date-someone-with-a-lot-of-debt/ */
+    background-image: url("../assets/couple_on_date.jpg");
+    background-size: cover;
+    height: 487px;
+    width: 700px;
+    margin: 0 auto;
+}
+
+body {
+    /*  Photo by Khadeeja Yasser*/
+    background: url("../assets/khadeeja-yasser-FHT0KEOwtyg-unsplash.jpg"); 
+    background-size: cover;
+}
+
+.navbar {
+    background-color: rgba(216, 186, 200, 1);
+}
+
+#home-text {
+    background-color: rgba(216, 186, 200, 0.5);
+    color: black;
+}
+
+.form-box {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.signup {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 0 auto;
+}
+
+.profile_page {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 auto;
+}
+
+.profile-img {
+    max-width: 40vw;
+}
+
+.profile-box {
+    margin: 1vw 0 1vw 1vw;
+    padding: 1vw 0 5vw 5vw;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.img-responsive {
+    max-width: 40vw;
+    max-height: 25vw;
+}
+
+.card {
+    display: inline-block;
+    padding: 5px;
+}
+
+.message-card {
+    display: block;
+}
+
+.slider {
+    width: 95%;
+    padding-left: 2.5%;
+}
+
+.sex-box {
+    background-color: rgba(216, 186, 200, 0.5);
+    margin-left: 1px;
+}
+
+.interest_list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.interest_list li {
+    display: inline;
+}
+
+.message-image {
+    max-height: 20vh;
+}
+
+@media (max-width: 600px) {
+    .interest_list {
+        display: block;
+    }
+
+    .hero {
+        width: 90vw;
+        /* photo source https://keepinitfrugal.com/25-frugal-no-tech-date-night-ideas-for-couples/ */
+        background-image: url("../assets/25-frugal-no-tech-date-night-ideas-for-couples-1.jpg");
+    }
+
+    .spacing {
+        display: none;
+    }
+
+}

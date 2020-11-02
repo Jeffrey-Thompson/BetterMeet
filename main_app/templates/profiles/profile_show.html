@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="profile_page container columns">
+        {% if user.id == request.user.id %} 
+            <div class="col-3 hide-sm"></div>
+            <a href="{% url 'profile_index' %}" class="btn btn-success">Show Me My Matches</a>
+            <a href="{% url 'messages_all' %}" class="btn btn-primary">See All My Messages</a>
+            <div class="col-3 hide-sm"></div>
+        {% else %}
+            <a href="{% url 'create_message' profile.id %}" class="btn btn-success col-mx-auto">Send Them A Message</a>
+        {% endif %}
+        <div class="container columns">
+            <div class="column col-1 spacing"></div>
+            <div class="column col-5 col-sm-12">
+                <h3 class="col-mx-auto" style="text-align:center">{{user.username}}</h3>
+                <img src="{{profile.image}}" alt="{{user.username}}" class="profile-img">
+                <h3 class="col-mx-auto" style="text-align:center">About Me:</h3>
+                <p class="profile-box">{{profile.description}}</p>
+            </div>
+            <div class="column col-5 col-sm-12">
+                <h3 class="col-mx-auto" style="text-align:center">Profile Information:</h3>
+                <div class="profile-box">
+                    <ul>
+                        <li>Gender: {{profile.gender}}</li>
+                        <li>Height: {{profile.height}}cm</li>
+                        <li>Race: {{profile.get_race_display}}</li>
+                        <li>Relationship Status: {{profile.get_relationship_status_display}}</li>
+                        <li>Body Type: {{profile.get_body_type_display}}</li>
+                        <li>Religion: {{profile.get_religion_display}}</li>
+                        <li>Level of Education: {{profile.get_education_display}}</li>
+                        {% if profile.has_kids %}
+                            <li>I have children.</li>
+                        {% else %}
+                            <li>I do not have children.</li>
+                        {% endif %}
+                        {% if profile.wants_kids %}
+                            <li>I want to have children in the future.</li>
+                        {% else %}
+                            <li>I do not want to have children in the future.</li>
+                        {% endif %}
+                        {% if profile.smokes %}
+                            <li>I use tobacco.</li>
+                        {% else %}
+                            <li>I do not use tobacco.</li>
+                        {% endif %}
+                        {% if profile.drinks %}
+                            <li>I drink alcohol.</li>
+                        {% else %}
+                            <li>I do not drink alcohol.</li>
+                        {% endif %}
+                    </ul>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-1" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-1">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Interests
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for interest in profile.interests %}
+                                    <li>{{interest}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% if request.user.id == profile.user.id %}
+                        <a href="{% url 'profile_edit' user.profile.id %}" class="btn btn-success">Edit My Profile</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="column col-1 spacing"></div>
+        </div>
+        <div class="container columns">
+            <div class="column col-1 spacing"></div>
+            <div class="column col-5 col-sm-12">
+                <h3 class="col-mx-auto" style="text-align:center">The People I Like:</h3>
+                <div class="profile-box">
+                    <h6>They should be between {{preferences.min_height}} and {{preferences.max_height}}cm tall.</h6>
+                    {% if preferences.has_kids %}
+                        <h6>I would date someone who already has kids.</h6>
+                    {% endif %}
+                    {% if preferences.has_no_kids %}
+                        <h6>I would date someone who doesn't already have kids.</h6>
+                    {% endif %}
+                    {% if preferences.wants_kids %}
+                        <h6>I would date someone who wants to have kids.</h6>
+                    {% endif %}
+                    {% if preferences.never_wants_kids %}
+                        <h6>I would date someone who doesn't want kids in the future.</h6>
+                    {% endif %}
+                    {% if preferences.smoke %}
+                        <h6>I would date someone who uses tobacco.</h6>
+                    {% endif %}
+                    {% if preferences.never_smoke %}
+                        <h6>I would date someone who never uses tobacco.</h6>
+                    {% endif %}
+                    {% if preferences.drink %}
+                        <h6>I would date someone who drinks alcohol.</h6>
+                    {% endif %}
+                    {% if preferences.has_kids %}
+                        <h6>I would date someone who never drinks alcohol.</h6>
+                    {% endif %}
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-2" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-2">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Race
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for race in preferences.race %}
+                                    <li>{{race}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-3" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-3">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Relationship Status
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for status in preferences.relationship_status %}
+                                    <li>{{status}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-4" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-4">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Body Type
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for body in preferences.body_type %}
+                                    <li>{{body}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-5" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-5">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Religion
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for religion in preferences.religion %}
+                                    <li>{{religion}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input type="checkbox" id="accordion-6" name="accordion-checkbox" hidden>
+                        <label class="accordion-header text-large" for="accordion-6">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                                Education Level
+                            </label>
+                        <div class="accordion-body">
+                            <ul>
+                                {% for level in preferences.education %}
+                                    <li>{{level}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% if request.user.id == profile.user.id %}
+                        <a href="{% url 'preference_edit' profile.preferences.id %}" class="btn btn-success">Edit My Preferences</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% if request.user.id == user.id %}
+            <div class="column col-5 col-sm-12">
+                <h3 class="col-mx-auto" style="text-align:center">Recent Messages:</h3>
+                <a href="{% url 'messages_all' %}" class="btn btn-primary col-mx-auto col-12">See All My Messages</a>
+                <div class="container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="card message-card">
+                            <figure class="float-center">
+                                <img src="{{message.sender.image}}" alt="{{message.sender.user.username}}" class="img-responsive">
+                            </figure>
+                            <div class="card-header message-header">
+                                <div class="card-title h5">{{message.title}}</div>
+                                <div class="card-subtitle text-gray">Sent by: {{message.sender.user.username}}</div>
+                                <div class="card-subtitle text-gray">Sent: {{message.date_created}}</div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{message.body}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'profile_show' message.sender.id %}" class="btn btn-primary">View {{message.sender.user.username}}'s profile</a>
+                                <a href="{% url 'create_message' message.sender.id %}" class="btn btn-success">Send a reply</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>You haven't recieved any messages.</h3>
+                    <h3>Time to make the first move.</h3>
+                    <h3>Don't give up.</h3>
+                {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="column col-5 col-sm-12">
+                <h3 class="col-mx-auto" style="text-align:center">How I Stack Up:</h3>
+                <div class="profile-box">
+                    <h5>You match their preferences in {{category_match}} out of 11 categories.</h5>
+                    <h5>You have {{common_interests|length}} common interests.</h5>
+                    <span class="h3">Match Rating: </span>
+                    {% if match_rating == "Awful" or match_rating == "Poor" %}
+                        <span class="h3 text-error">{{match_rating}}</span><br><br>
+                    {% else %}
+                        <span class="h3 text-success">{{match_rating}}</span><br><br>
+                    {% endif %}
+                    <a href="{% url 'create_message' profile.id %}" class="btn btn-success">Send Them A Message</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="column col-1 spacing"></div>
+        </div>
+    </div>
+
+{% endblock content %}
