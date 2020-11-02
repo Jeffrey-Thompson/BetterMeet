@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,14 +41,20 @@
                     </div>
                 </div>
                 <div class="column col-1"></div>
-                <div class="column col-3 form-box form-group">
-                    {{ profile_form.as_p }}
+                <div class="column col-3 col-md-10 form-box form-group uniForm">
+                    {{ profile_form|crispy }}
                 </div>
-                <div class="column col-7">
-                    <div class="form-box">
-                        <h3>On a scale of 0 to 100: How much do you like sex?</h3>
-                        <h6>Please answer honestly. Your answer will not be shown on your profile.</h6>
+                <div class="column col-7 col-md-10">
+                    <div class="form-box columns container sex-box">
+                        <h3 class="col-12 col-mx-auto" style="text-align:center">On a scale of 0 to 100: How much do you like sex?</h3>
+                        <h6 class="col-12 col-mx-auto" style="text-align:center">Please answer honestly. Your answer will not be shown on your profile.</h6>
+                        <span class="col-3">I am Asexual.</span>
+                        <div class="col-6"></div>
+                        <span class="col-3 float-right" style="text-align:right">Conversation is optional.</span>
                         <input type="range" name="sex_drive" class="slider tooltip" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
+                        <span class="col-1">0</span>
+                        <div class="col-10"></div>
+                        <span class="col-1" style="text-align:right">100</span>
                     </div>
                     <div class="form-box">
                         <h3>What are your interests?</h3>
@@ -112,6 +119,20 @@
                 <input type="hidden" name="interests" value="" id="interests_input">
             </div>
         </form>
+    <ul class="step">
+        <li class="step-item">
+            <a href="#" class="tooltip" data-tooltip="Create an account">Create an account</a>
+        </li>
+        <li class="step-item active">
+            <a href="#" class="tooltip" data-tooltip="Tell us who you are">Tell us who you are</a>
+        </li>
+        <li class="step-item">
+            <a href="#" class="tooltip text-dark" data-tooltip="Tell us who you like">Tell us who you like</a>
+        </li>
+        <li class="step-item">
+            <a href="#" class="tooltip text-dark" data-tooltip="Find love">Find love</a>
+        </li>
+    </ul>
     </div>
 </body>
 </html>

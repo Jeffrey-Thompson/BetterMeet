@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container columns">
+    <div class="col-1"></div>
+    <div class="column col-10">
+        <h1 class="col-mx-auto" style="text-align:center">{{request.user.username}}'s Messages:</h1>
+        {% if messages %}
+            <div class="filter">
+                <input type="radio" id="tag-0" class="filter-tag" name="filter-radio" hidden>
+                <input type="radio" id="tag-1" class="filter-tag" name="filter-radio" hidden checked>
+                <input type="radio" id="tag-2" class="filter-tag" name="filter-radio" hidden>
+                <div class="filter-nav">
+                    <span>Filter By: </span>
+                    <label for="tag-0" class="chip">All Messages</label>
+                    <label for="tag-1" class="chip">Recieved</label>
+                    <label for="tag-2" class="chip">Sent</label>
+                </div>
+                {% for message in messages %}
+                    <div class="filter-body">
+                        <div class="container">
+                            <div class="card filter-item message-card" 
+                                {% if request.user.id == message.recipient.user.id %}
+                                    data-tag="tag-1"
+                                {% else %}
+                                    data-tag="tag-2"
+                                {% endif %}>
+                                <img src="{{message.sender.image}}" alt="{{message.sender.user.username}}" class="img-responsive float-left message-image">
+                                <div class="card-header">
+                                    <div class="card-title h5">{{message.title}}</div>
+                                    <div class="card-subtitle text-gray">Sent by: {{message.sender.user.username}}</div>
+                                    <div class="card-subtitle text-gray">Sent: {{message.date_created}}</div>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{message.body}}</p>
+                                </div>
+                                {% if request.user.id != message.sender.user.id %}
+                                    <div class="card-footer">
+                                        <a href="{% url 'profile_show' message.sender.id %}" class="btn btn-primary">View {{message.sender.user.username}}'s profile</a>
+                                        <a href="{% url 'create_message' message.sender.id %}" class="btn btn-success">Send a reply</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h3>You haven't sent or recieved any messages...yet.</h3>
+            <h3>Time to make the first move.</h3>
+            <h3>Don't give up.</h3>
+        {% endif %}
+    </div>
+    <div class="col-1"></div>
+</div>
+
+{% endblock content %}

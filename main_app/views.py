@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .forms import User_Form, Profile_Form
+from .forms import User_Form, Profile_Form, Message_Form
 from django.contrib.auth.models import User
-from .models import Profile, Preferences
+from .models import Profile, Preferences, Utils, Message
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -141,11 +142,20 @@ def profile_show(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     user = profile.user
     preferences = profile.preferences
+    current_user = request.user
+    category_match = Utils.compareMatch(current_user.profile, profile)
+    common_interests = Utils.common_interests(current_user.profile.interests, profile.interests)
+    match_rating = Utils.match_rating(category_match, common_interests)
+    messages = Message.objects.filter(recipient_id=profile_id)[:5]
     context = {
         'profile': profile,
         'user': user,
         'preferences': preferences,
-        'title': f"{user.username}'s Profile"
+        'title': f"{user.username}'s Profile",
+        'category_match': category_match,
+        'common_interests': common_interests,
+        'match_rating': match_rating,
+        'messages': messages,
     }
     return render(request, 'profiles/profile_show.html', context)
 
@@ -154,9 +164,7 @@ def profile_show(request, profile_id):
 def profile_index(request):
     user = request.user
     gender_preference = user.profile.preferences.genders
-    print(gender_preference)
     profiles = Profile.objects.all()
-    print(profiles)
     gender_matches = []
     for profile in profiles:
         if profile.id == user.profile.id:
@@ -169,7 +177,6 @@ def profile_index(request):
         for gender in match.preferences.genders:
             if gender == user.profile.gender:
                 sexuality_match.append(match)
-    print(sexuality_match)
     context = {
         'matches': sexuality_match,
         'title': f"{user.username}'s Matches",
@@ -299,3 +306,38 @@ def user_delete(request, user_id):
     if request.user.id == user_id:
         User.objects.get(id=user_id).delete()
         return redirect('home')
+
+# Create Message
+@login_required
+def create_message(request, recipient_id):
+    recipient = Profile.objects.get(id=recipient_id)
+    current_user = request.user
+    category_match = Utils.compareMatch(current_user.profile, recipient)
+    common_interests = Utils.common_interests(current_user.profile.interests, recipient.interests)
+    match_rating = Utils.match_rating(category_match, common_interests)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        sender = request.user.profile
+        recipient = recipient
+        Message.objects.create(title=title, body=body, sender=sender, recipient=recipient)
+        return redirect('profile_index')
+    context = {
+        'title': 'Send Message',
+        'profile': recipient,
+        'common_interests': common_interests,
+        'match_rating': match_rating,
+    }
+    return render(request, 'messages/create.html', context)
+
+#All Messages
+@login_required
+def messages_all(request):
+    user = request.user
+    messages = Message.objects.filter(Q(sender_id=user.profile.id) | Q(recipient_id=user.profile.id))
+    context = {
+        'title': 'Message Center',
+        'messages': messages,
+        'user': user,
+    }
+    return render(request, 'messages/all.html', context)
