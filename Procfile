@@ -1,1 +1,1 @@
-web: gunicorn {BetterMeet}.wsgi
+web: gunicorn BetterMeet.wsgi
