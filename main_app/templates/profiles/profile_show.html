@@ -12,10 +12,10 @@
             <div class="column col-5 col-sm-10">
                 <h3 class="col-mx-auto" style="text-align:center">{{user.username}}</h3>
                 <img src="{{profile.image}}" alt="{{user.username}}" class="profile-img">
-            </div>
-            <div class="column col-5 col-sm-10">
                 <h3 class="col-mx-auto" style="text-align:center">About Me:</h3>
                 <p class="profile-box">{{profile.description}}</p>
+            </div>
+            <div class="column col-5 col-sm-10">
                 <h3 class="col-mx-auto" style="text-align:center">Profile Information:</h3>
                 <div class="profile-box">
                     <ul>
@@ -179,7 +179,7 @@
                 <div class="container">
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="card">
+                        <div class="card message-card">
                             <figure class="avatar avatar-xl float-left">
                                 <img src="{{message.sender.image}}" alt="{{message.sender.user.username}}" class="img-responsive">
                             </figure>

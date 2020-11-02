@@ -55,6 +55,11 @@ body {
     display: inline-block;
     padding: 5px;
 }
+
+.message-card {
+    display: block;
+}
+
 .slider {
     width: 95%;
     padding-left: 2.5%;
