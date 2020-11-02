@@ -18,5 +18,6 @@ urlpatterns = [
     path('profiles/<int:user_id>/delete', views.user_delete, name="user_delete"),
 
     # Messages
-    path('messages/create/<int:recipient_id>', views.create_message, name="create_message")
+    path('messages/create/<int:recipient_id>', views.create_message, name="create_message"),
+    path('messages/all', views.messages_all, name='messages_all')
 ]

@@ -3,7 +3,10 @@
 {% block content %}
     <div class="profile_page container columns">
         {% if user.id == request.user.id %} 
-            <a href="{% url 'profile_index' %}" class="btn btn-success col-mx-auto">Show Me My Matches</a>
+            <div class="col-3 hide-sm"></div>
+            <a href="{% url 'profile_index' %}" class="btn btn-success">Show Me My Matches</a>
+            <a href="{% url 'messages_all' %}" class="btn btn-primary">See All My Messages</a>
+            <div class="col-3 hide-sm"></div>
         {% else %}
             <a href="{% url 'create_message' profile.id %}" class="btn btn-success col-mx-auto">Send Them A Message</a>
         {% endif %}
@@ -176,6 +179,7 @@
             {% if request.user.id == user.id %}
             <div class="column col-5 col-sm-10">
                 <h3 class="col-mx-auto" style="text-align:center">Recent Messages:</h3>
+                <a href="{% url 'messages_all' %}" class="btn btn-primary col-mx-auto col-12">See All My Messages</a>
                 <div class="container">
                 {% if messages %}
                     {% for message in messages %}

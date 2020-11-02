@@ -19,8 +19,9 @@
         </section>
         <section class="navbar-section">
             {% if user.is_authenticated %}
-                <a href="{% url 'profile_index' %}" class="btn btn-link">Show Me My Matches</a>
-                <a href="{% url 'profile_show' request.user.profile.id %}" class="btn btn-link">See My Profile</a>
+                <a href="{% url 'profile_index' %}" class="btn btn-link">My Matches</a>
+                <a href="{% url 'messages_all' %}" class="btn btn-link">My Messages</a>
+                <a href="{% url 'profile_show' request.user.profile.id %}" class="btn btn-link">My Profile</a>
                 <a href="{% url 'logout' %}" class="btn btn-link">Log Out</a>
             {% else %}
                 <a href="{% url 'signup' %}" class="btn btn-link">Sign-up</a>

@@ -5,6 +5,7 @@ from .forms import User_Form, Profile_Form, Message_Form
 from django.contrib.auth.models import User
 from .models import Profile, Preferences, Utils, Message
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -328,3 +329,15 @@ def create_message(request, recipient_id):
         'match_rating': match_rating,
     }
     return render(request, 'messages/create.html', context)
+
+#All Messages
+@login_required
+def messages_all(request):
+    user = request.user
+    messages = Message.objects.filter(Q(sender_id=user.profile.id) | Q(recipient_id=user.profile.id))
+    context = {
+        'title': 'Message Center',
+        'messages': messages,
+        'user': user,
+    }
+    return render(request, 'messages/all.html', context)
