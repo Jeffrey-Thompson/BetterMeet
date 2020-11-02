@@ -5,13 +5,13 @@
 <div class="container columns profile_page">
     <h1 class="column col-12 text-center">Send A Message</h1>
     <div class="column col-1"></div>
-    <div class="column col-4">
+    <div class="column col-4 col-sm-10">
         <figure class="figure">
             <img src="{{profile.image}}" alt="{{profile.user.username}}" class="img-responsive">
             <figcaption class="figure-caption h3">{{profile.user.username}}</figcaption>
         </figure>
     </div>
-    <div class="columns col-6">
+    <div class="columns col-6 col-sm-10">
         <form action="{% url 'create_message' profile.id %}" method="POST" class="form-horizontal">
             <div class="form-group">
                 {% csrf_token %}

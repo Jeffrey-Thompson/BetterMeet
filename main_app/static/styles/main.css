@@ -76,5 +76,13 @@ body {
 }
 
 @media (max-width: 600px) {
+    .interest_list {
+        display: block;
+    }
 
+    .hero {
+        width: 90vw;
+        /* photo source https://keepinitfrugal.com/25-frugal-no-tech-date-night-ideas-for-couples/ */
+        background-image: url("../assets/25-frugal-no-tech-date-night-ideas-for-couples-1.jpg");
+    }
 }
