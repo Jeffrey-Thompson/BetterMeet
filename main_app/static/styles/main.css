@@ -29,10 +29,12 @@ body {
 
 .signup {
     background-color: rgba(255, 255, 255, 0.6);
+    margin: 0 auto;
 }
 
 .profile_page {
     background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 auto;
 }
 
 .profile-img {
@@ -93,6 +95,10 @@ body {
         width: 90vw;
         /* photo source https://keepinitfrugal.com/25-frugal-no-tech-date-night-ideas-for-couples/ */
         background-image: url("../assets/25-frugal-no-tech-date-night-ideas-for-couples-1.jpg");
+    }
+
+    .spacing {
+        display: none;
     }
 
 }

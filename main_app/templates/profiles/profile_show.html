@@ -11,14 +11,14 @@
             <a href="{% url 'create_message' profile.id %}" class="btn btn-success col-mx-auto">Send Them A Message</a>
         {% endif %}
         <div class="container columns">
-            <div class="column col-1"></div>
-            <div class="column col-5 col-sm-10">
+            <div class="column col-1 spacing"></div>
+            <div class="column col-5 col-sm-12">
                 <h3 class="col-mx-auto" style="text-align:center">{{user.username}}</h3>
                 <img src="{{profile.image}}" alt="{{user.username}}" class="profile-img">
                 <h3 class="col-mx-auto" style="text-align:center">About Me:</h3>
                 <p class="profile-box">{{profile.description}}</p>
             </div>
-            <div class="column col-5 col-sm-10">
+            <div class="column col-5 col-sm-12">
                 <h3 class="col-mx-auto" style="text-align:center">Profile Information:</h3>
                 <div class="profile-box">
                     <ul>
@@ -69,11 +69,11 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="column col-1"></div>
+            <div class="column col-1 spacing"></div>
         </div>
         <div class="container columns">
-            <div class="column col-1"></div>
-            <div class="column col-5 col-sm-10">
+            <div class="column col-1 spacing"></div>
+            <div class="column col-5 col-sm-12">
                 <h3 class="col-mx-auto" style="text-align:center">The People I Like:</h3>
                 <div class="profile-box">
                     <h6>They should be between {{preferences.min_height}} and {{preferences.max_height}}cm tall.</h6>
@@ -177,18 +177,19 @@
                 </div>
             </div>
             {% if request.user.id == user.id %}
-            <div class="column col-5 col-sm-10">
+            <div class="column col-5 col-sm-12">
                 <h3 class="col-mx-auto" style="text-align:center">Recent Messages:</h3>
                 <a href="{% url 'messages_all' %}" class="btn btn-primary col-mx-auto col-12">See All My Messages</a>
                 <div class="container">
                 {% if messages %}
                     {% for message in messages %}
                         <div class="card message-card">
-                            <figure class="avatar avatar-xl float-left">
+                            <figure class="float-center">
                                 <img src="{{message.sender.image}}" alt="{{message.sender.user.username}}" class="img-responsive">
                             </figure>
-                            <div class="card-header">
+                            <div class="card-header message-header">
                                 <div class="card-title h5">{{message.title}}</div>
+                                <div class="card-subtitle text-gray">Sent by: {{message.sender.user.username}}</div>
                                 <div class="card-subtitle text-gray">Sent: {{message.date_created}}</div>
                             </div>
                             <div class="card-body">
@@ -208,7 +209,7 @@
                 </div>
             </div>
             {% else %}
-            <div class="column col-5 col-sm-10">
+            <div class="column col-5 col-sm-12">
                 <h3 class="col-mx-auto" style="text-align:center">How I Stack Up:</h3>
                 <div class="profile-box">
                     <h5>You match their preferences in {{category_match}} out of 11 categories.</h5>
@@ -223,7 +224,7 @@
                 </div>
             </div>
             {% endif %}
-            <div class="column col-1"></div>
+            <div class="column col-1 spacing"></div>
         </div>
     </div>
 
