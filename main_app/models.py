@@ -106,6 +106,11 @@ class Profile(models.Model):
     def __str__(self):
         return (f'{self.user.username} Profile')
 
+    def reduce_credits(self, message_cost):
+        self.message_credits = self.message_credits - message_cost
+        self.save()
+        return self.message_credits
+
 class Message(models.Model):
 
     title = models.CharField(max_length=200)
@@ -220,6 +225,9 @@ class Utils(models.Model):
             rating = rating + 15
         else:
             rating = rating + 17
+        return rating
+    
+    def text_rating(rating):    
         if rating < 10:
             score = "Awful"
         elif rating < 20:
@@ -231,3 +239,13 @@ class Utils(models.Model):
         else:
             score = "Great"
         return score
+
+    def calculate_cost(rating, sender, recipient):
+        messages = Message.objects.filter(sender=recipient, recipient=sender)
+        print(messages)
+        if messages:
+            cost = 0
+        else:
+            cost = 50 - rating
+        print(cost)
+        return cost

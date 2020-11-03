@@ -145,7 +145,8 @@ def profile_show(request, profile_id):
     current_user = request.user
     category_match = Utils.compareMatch(current_user.profile, profile)
     common_interests = Utils.common_interests(current_user.profile.interests, profile.interests)
-    match_rating = Utils.match_rating(category_match, common_interests)
+    rating = Utils.match_rating(category_match, common_interests)
+    match_rating = Utils.text_rating(rating)
     messages = Message.objects.filter(recipient_id=profile_id)[:5]
     context = {
         'profile': profile,
@@ -311,22 +312,27 @@ def user_delete(request, user_id):
 @login_required
 def create_message(request, recipient_id):
     recipient = Profile.objects.get(id=recipient_id)
-    current_user = request.user
-    category_match = Utils.compareMatch(current_user.profile, recipient)
-    common_interests = Utils.common_interests(current_user.profile.interests, recipient.interests)
-    match_rating = Utils.match_rating(category_match, common_interests)
+    current_user = request.user.profile
+    category_match = Utils.compareMatch(current_user, recipient)
+    common_interests = Utils.common_interests(current_user.interests, recipient.interests)
+    rating = Utils.match_rating(category_match, common_interests)
+    match_rating = Utils.text_rating(rating)
+    message_cost = Utils.calculate_cost(rating, current_user, recipient)
     if request.method == 'POST':
         title = request.POST.get('title')
         body = request.POST.get('body')
-        sender = request.user.profile
+        sender = current_user
         recipient = recipient
         Message.objects.create(title=title, body=body, sender=sender, recipient=recipient)
+        sender.reduce_credits(message_cost)
         return redirect('profile_index')
     context = {
         'title': 'Send Message',
         'profile': recipient,
         'common_interests': common_interests,
         'match_rating': match_rating,
+        'message_cost': message_cost,
+        'message_credits': current_user.message_credits
     }
     return render(request, 'messages/create.html', context)
 
