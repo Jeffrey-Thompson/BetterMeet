@@ -131,6 +131,5 @@ LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
-STATICFILES_STORAGE = ‘whitenoise.storage.CompressedManifestStaticFilesStorage’
 
 django_on_heroku.settings(locals())
