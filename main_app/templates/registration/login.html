@@ -2,12 +2,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Login</h1>
+<div class="columns">
+    <h1 class="col-mx-auto col-12 text-center">Login</h1>
 
-<form method="POST" action="{% url 'login' %}" class="uniForm">
-    {% csrf_token %}
-    {{form|crispy}}
-    <input type="submit" class="btn btn-success" value="login">
-    <input type="hidden" name="next" value="{{next}}">
-</form>
+    <div class="login-box col-mx-auto">
+        <form method="POST" action="{% url 'login' %}" class="uniForm">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" class="btn btn-success" value="login">
+            <input type="hidden" name="next" value="{{next}}">
+        </form>
+    </div>
+</div>
 {% endblock content %}
