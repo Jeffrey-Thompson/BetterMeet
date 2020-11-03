@@ -23,7 +23,12 @@
                     {% else %}
                         <span class="h3 text-success"> {{match_rating}}</span>
                     {% endif %}
-                <input type="submit" class="btn btn-success col-ml-auto" value="Send Message">
+                {% if message_credits > message_cost %}
+                    <input type="submit" class="btn btn-success col-ml-auto" value="Send Message ({{message_cost}} credits)">
+                {% else %}
+                    <button class="btn disabled btn-success col-ml-auto" tabindex="-1">Insufficient Credits (You need {{message_cost}} credits.)</button>
+                {% endif %}
+                <span class="h5">Remaining Credits: {{message_credits}}</span>
             </div>
         </form>
     </div>

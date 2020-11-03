@@ -28,8 +28,9 @@
                                 <img src="{{message.sender.image}}" alt="{{message.sender.user.username}}" class="img-responsive float-left message-image">
                                 <div class="card-header">
                                     <div class="card-title h5">{{message.title}}</div>
-                                    <div class="card-subtitle text-gray">Sent by: {{message.sender.user.username}}</div>
-                                    <div class="card-subtitle text-gray">Sent: {{message.date_created}}</div>
+                                    <div class="card-subtitle text-gray">By: {{message.sender.user.username}}</div>
+                                    <div class="card-subtitle text-gray">To: {{message.recipient.user.username}}</div>
+                                    <div class="card-subtitle text-gray">Time: {{message.date_created}}</div>
                                 </div>
                                 <div class="card-body">
                                     <p>{{message.body}}</p>
