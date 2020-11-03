@@ -86,6 +86,19 @@ body {
     max-height: 20vh;
 }
 
+.login-box {
+    margin: 0 auto;
+}
+
+.ctrlHolder {
+    display: flex;
+    flex-direction: column;
+}
+
+#div_id_has_kids, #div_id_wants_kids, #div_id_smokes, #div_id_drinks {
+    flex-direction: row;
+}
+
 @media (max-width: 600px) {
     .interest_list {
         display: block;

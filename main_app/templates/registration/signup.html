@@ -2,34 +2,36 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Sign Up</h1>
+<div class="signup columns">
+    <h1 class="col-mx-auto col-12 text-center">Sign Up</h1>
 
-{% if error_message %}
-    <div class="toast toast-error">
-        <button class="btn btn-clear float-right"></button>
-        {{error_message}}
+    {% if error_message %}
+        <div class="toast toast-error">
+            <button class="btn btn-clear float-right"></button>
+            {{error_message}}
+        </div>
+    {% else %}
+    {% endif %}
+    <div class="col-mx-auto">
+        <form method="POST" action="{% url 'signup' %}" class="uniForm">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" class="btn btn-success" value="signup">
+        </form>
     </div>
-{% else %}
-{% endif %}
-
-<form method="POST" action="{% url 'signup' %}" class="uniForm">
-    {% csrf_token %}
-    {{form|crispy}}
-    <input type="submit" class="btn btn-success" value="signup">
-</form>
-
-<ul class="step">
-    <li class="step-item active">
-        <a href="#" class="tooltip" data-tooltip="Create an account">Create an account</a>
-    </li>
-    <li class="step-item">
-        <a href="#" class="tooltip text-dark" data-tooltip="Tell us who you are">Tell us who you are</a>
-    </li>
-    <li class="step-item">
-        <a href="#" class="tooltip text-dark" data-tooltip="Tell us who you like">Tell us who you like</a>
-    </li>
-    <li class="step-item">
-        <a href="#" class="tooltip text-dark" data-tooltip="Find love">Find love</a>
-    </li>
-</ul>
+    <ul class="step">
+        <li class="step-item active">
+            <a href="#" class="tooltip" data-tooltip="Create an account">Create an account</a>
+        </li>
+        <li class="step-item">
+            <a href="#" class="tooltip text-dark" data-tooltip="Tell us who you are">Tell us who you are</a>
+        </li>
+        <li class="step-item">
+            <a href="#" class="tooltip text-dark" data-tooltip="Tell us who you like">Tell us who you like</a>
+        </li>
+        <li class="step-item">
+            <a href="#" class="tooltip text-dark" data-tooltip="Find love">Find love</a>
+        </li>
+    </ul>
+</div>
 {% endblock content %}
