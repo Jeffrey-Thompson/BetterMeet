@@ -33,4 +33,15 @@ Phase 3
 <img src="images/BetterMeetERD.png" alt="ERD">
 
 # Wireframes
-<img src="images/Home page wireframe.png" alt="Home page wireframe">
+Home Page
+<img src="images/Home page wireframe.png" alt="Home page wireframe"><br>
+Profile Sign Up
+<img src="images/Signup two wireframe.png" alt="Profile Sign Up"><br>
+Preferences Sign Up
+<img src="images/Signup Three wireframe.png" alt="Preferences Sign Up"><br>
+Profile Page
+<img src="images/Profile wireframe.png" alt="Profile Page"><br>
+Send Message
+<img src="images/Send message wireframe.png" alt="Send Message Page"><br>
+All Messages
+<img src="images/All message page.png" alt="All Messages Page">
