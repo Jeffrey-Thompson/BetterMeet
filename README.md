@@ -28,3 +28,9 @@ Phase 3
 <br>Tuesday- Stretch goal: Message credits
 <br>Wednesday-Final styling
 <br>Thursday-Build database 
+
+# ERD
+<img src="images/BetterMeetERD.png" alt="ERD">
+
+# Wireframes
+<img src="images/Home page wireframe.png" alt="Home page wireframe">
