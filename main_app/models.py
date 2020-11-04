@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+from better_meet.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
 
 
 # Create your models here.
@@ -249,3 +251,12 @@ class Utils(models.Model):
             cost = 50 - rating
         print(cost)
         return cost
+
+    def send_email(user, subject, message, signup):
+        if signup:
+            subject = 'Welcome to BetterMeet'
+            message = "BetterMeet is a tech demo constructed by Jeffrey Thompson using of Django/PostgresSQL/Spectre. If you are looking for a date, sorry he's married, but if you are looking for a software developer send him an email at jeffathomp@gmail.com. \n\nGood Luck in Love,\n\nBetter Meet"
+        recipient = user.email
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
+        return 'sent email'
+
