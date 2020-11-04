@@ -9,6 +9,21 @@ A user visits the home page and is invited to sign up for an account. They are t
 
 A user will be able to sign up for the site with an option to add a new gender to the database. A user will be able to edit their profile and preferences. A user will be able to view the profiles of other users with matching gender preferences. Messages and the message credit system will not be available.
 
+# Technologies
+
+<br>Django Framework
+<br>PostgresSQL Database
+<br>Spectre Library
+
+# Installation Steps
+
+<ol>
+    <li>Fork and clone this repo.</li>
+    <li>Install requirements.</li>
+    <li>Create "better-meet" database.</li>
+    <li>Migrate.</li>
+</ol>
+
 # Schedule
 
 Phase 1
@@ -25,7 +40,7 @@ Phase 2
 
 
 Phase 3
-<br>Tuesday- Stretch goal: Message credits
+<br>Tuesday-Stretch goal: Message credits
 <br>Wednesday-Final styling
 <br>Thursday-Build database 
 
