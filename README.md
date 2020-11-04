@@ -43,5 +43,5 @@ Profile Page
 <img src="images/Profile wireframe.png" alt="Profile Page"><br>
 Send Message
 <img src="images/Send message wireframe.png" alt="Send Message Page"><br>
-All Messages
+All Messages<br>
 <img src="images/All message page.png" alt="All Messages Page">
