@@ -89,6 +89,14 @@ def signup_three(request):
         religion = request.POST.get('religion')
         race = request.POST.get('race')
         smoke = request.POST.get('smoke')
+        if not max_height:
+            max_height = 244
+        if not min_height:
+            min_height = 0
+        if not min_sex_drive:
+            min_sex_drive = 0
+        if not max_sex_drive:
+            max_sex_drive = 100
         if not smoke:
             smoke = False
         never_smoke = request.POST.get('never_smoke')
