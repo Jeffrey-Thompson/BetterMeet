@@ -23,7 +23,7 @@ def signup(request):
             subject = ''
             message = ''
             signup = True
-            Utils.send_email(user, subject, message, signup)
+            # Utils.send_email(user, subject, message, signup)
             login(request, user)
             return redirect('signup_two')
         else:
@@ -337,7 +337,7 @@ def create_message(request, recipient_id):
         recipient = recipient
         signup = False
         message = f"{body}\n\n{sender.user.username}"
-        Utils.send_email(recipient.user, title, message, signup)
+        # Utils.send_email(recipient.user, title, message, signup)
         Message.objects.create(title=title, body=body, sender=sender, recipient=recipient)
         sender.reduce_credits(message_cost)
         return redirect('profile_index')
